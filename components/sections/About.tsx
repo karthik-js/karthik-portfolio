@@ -1,18 +1,18 @@
-'use client'
+"use client";
 
-import { motion, type Variants } from 'framer-motion'
+import { motion, type Variants } from "framer-motion";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
-}
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+};
 
 const stats = [
-  { value: '7+', label: 'Years Experience' },
-  { value: '5', label: 'Companies' },
-  { value: '3', label: 'Countries Reached' },
-  { value: '4', label: 'Teams Led' },
-]
+  { value: "8+", label: "Years Experience" },
+  { value: "6", label: "Companies" },
+  { value: "3", label: "Countries Reached" },
+  { value: "10+", label: "Engineers Led" },
+];
 
 export function About() {
   return (
@@ -27,30 +27,56 @@ export function About() {
         >
           {/* Left: Text */}
           <div>
-            <motion.p variants={fadeUp} className="text-sm font-medium text-[var(--color-accent)] uppercase tracking-widest mb-4">
+            <motion.p
+              variants={fadeUp}
+              className="text-sm font-medium text-accent uppercase tracking-widest mb-4"
+            >
               About
             </motion.p>
-            <motion.h2 variants={fadeUp} className="text-3xl sm:text-4xl font-bold text-[var(--color-foreground)] mb-8 leading-tight">
-              Engineer by craft,<br />
-              <span className="text-[var(--color-accent)]">builder by nature</span>
+            <motion.h2
+              variants={fadeUp}
+              className="text-3xl sm:text-4xl font-bold text-foreground mb-8 leading-tight"
+            >
+              Engineer by craft,
+              <br />
+              <span className="text-accent">builder by nature</span>
             </motion.h2>
-            <motion.div variants={fadeUp} className="space-y-5 text-[var(--color-muted)] leading-relaxed">
+            <motion.div
+              variants={fadeUp}
+              className="space-y-5 text-muted leading-relaxed"
+            >
               <p>
-                I&apos;m a Full Stack Engineer with 7+ years of shipping products that move the needle. I specialize in React, Next.js, and Node.js — but what I actually do is turn complex problems into elegant, fast, and delightful digital experiences.
+                I&apos;m a Lead Frontend Engineer with 8+ years building
+                high-traffic web platforms — from startup MVPs to
+                enterprise-grade B2B e-commerce serving multiple markets. I
+                specialize in Next.js App Router architecture, enterprise
+                authentication, and platform migrations at monorepo scale.
               </p>
               <p>
-                I&apos;ve led teams, redesigned entire platforms, cut API latency by 30%, grown sign-ups by 400%, and shipped a full compliance product in 4 months. Currently leading experience engineering at Publicis Sapient, building enterprise-grade B2B applications.
+                Currently leading ~10 frontend engineers across two parallel
+                tracks on a TypeScript monorepo, where I drove a 20% page-load
+                improvement, scaled test coverage to 4,500+ tests, and pioneered
+                an agentic AI workflow that cut ticket closure time by ~35%.
               </p>
               <p>
-                When I&apos;m not building products, I&apos;m exploring new patterns in distributed systems, contributing to open source, and automating everything I possibly can.
+                When I&apos;m not building products, I&apos;m designing
+                AI-augmented development workflows, contributing to open source,
+                and automating everything I possibly can.
               </p>
             </motion.div>
 
             <motion.div variants={fadeUp} className="mt-8 flex flex-wrap gap-3">
-              {['React / Next.js', 'Node.js', 'TypeScript', 'GraphQL', 'System Design'].map((tech) => (
+              {[
+                "Next.js 15",
+                "React 19",
+                "TypeScript",
+                "GraphQL",
+                "AI-Augmented DX",
+                "Frontend Architecture",
+              ].map((tech) => (
                 <span
                   key={tech}
-                  className="px-3 py-1.5 rounded-lg text-sm font-medium border border-[var(--color-border)] bg-[var(--color-card)] text-[var(--color-foreground)]"
+                  className="px-3 py-1.5 rounded-lg text-sm font-medium border border-border bg-card text-foreground"
                 >
                   {tech}
                 </span>
@@ -68,28 +94,39 @@ export function About() {
                 <motion.div
                   key={label}
                   variants={fadeUp}
-                  className="p-6 rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] group hover:border-[var(--color-accent)]/50 transition-all duration-300"
+                  className="p-6 rounded-2xl border border-border bg-card group hover:border-accent/50 transition-all duration-300"
                 >
-                  <p className="text-4xl font-bold text-[var(--color-foreground)] group-hover:text-[var(--color-accent)] transition-colors">
+                  <p className="text-4xl font-bold text-foreground group-hover:text-accent transition-colors">
                     {value}
                   </p>
-                  <p className="mt-2 text-sm text-[var(--color-muted)]">{label}</p>
+
+                  <p className="mt-2 text-sm text-muted">
+                    {label}
+                  </p>
                 </motion.div>
               ))}
             </motion.div>
 
             <motion.div
               variants={fadeUp}
-              className="mt-4 p-6 rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)]"
+              className="mt-4 p-6 rounded-2xl border border-border bg-card"
             >
-              <p className="text-sm font-medium text-[var(--color-foreground)] mb-3">Currently at</p>
+              <p className="text-sm font-medium text-foreground mb-3">
+                Currently at
+              </p>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/20 flex items-center justify-center">
-                  <span className="text-xs font-bold text-[var(--color-accent)]">PS</span>
+                <div className="w-10 h-10 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center">
+                  <span className="text-xs font-bold text-accent">
+                    PS
+                  </span>
                 </div>
                 <div>
-                  <p className="font-semibold text-[var(--color-foreground)]">Publicis Sapient</p>
-                  <p className="text-xs text-[var(--color-muted)]">Lead Experience Engineer · Nov 2024 – Present</p>
+                  <p className="font-semibold text-foreground">
+                    Publicis Sapient
+                  </p>
+                  <p className="text-xs text-muted">
+                    Lead Experience Engineer · Nov 2024 – Present
+                  </p>
                 </div>
               </div>
             </motion.div>
@@ -99,11 +136,13 @@ export function About() {
               className="mt-4 p-4 rounded-2xl border border-emerald-500/20 bg-emerald-500/5 flex items-center gap-3"
             >
               <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <p className="text-sm text-emerald-400 font-medium">Open to new opportunities</p>
+              <p className="text-sm text-emerald-400 font-medium">
+                Open to new opportunities
+              </p>
             </motion.div>
           </div>
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

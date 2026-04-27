@@ -12,7 +12,7 @@ export function Footer() {
     <footer className="border-t border-[var(--color-border)] py-8">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
         <p className="text-sm text-[var(--color-muted)]">
-          © 2025 Karthik Talam · Built with{' '}
+          © 2026 Karthik Talam · Built with{' '}
           <a
             href="https://nextjs.org"
             target="_blank"
