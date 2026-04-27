@@ -121,7 +121,7 @@ function BodyTooltip({ info }: { info: BodyInfo }) {
 }
 
 function BodyMarker({ info }: { info: BodyInfo }) {
-  if (info.visible < 0.1) return null;
+  if (info.visible < 0.05) return null;
   const left = `${((info.xNorm + 1) * 50).toFixed(2)}%`;
   const top = `${((1 - info.yNorm) * 100).toFixed(2)}%`;
   // Flip the tooltip side based on which half of the canvas the body is in
@@ -130,18 +130,25 @@ function BodyMarker({ info }: { info: BodyInfo }) {
 
   return (
     <div
-      className="absolute pointer-events-auto group"
-      style={{ left, top, transform: "translate(-50%, -50%)" }}
+      className="absolute group"
+      style={{
+        left,
+        top,
+        transform: "translate(-50%, -50%)",
+        pointerEvents: "auto",
+        zIndex: 1,
+      }}
     >
       <button
         type="button"
         aria-label={`${info.body} details`}
-        className="block w-20 h-20 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-accent cursor-help bg-transparent"
+        className="block w-24 h-24 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-accent cursor-help bg-transparent ring-1 ring-transparent hover:ring-accent/40 transition-[box-shadow,ring] duration-150"
+        style={{ pointerEvents: "auto" }}
       />
       <div
         className={`absolute top-1/2 -translate-y-1/2 ${
           onLeftHalf ? "left-full ml-3" : "right-full mr-3"
-        } opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-150 pointer-events-none`}
+        } opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-150 pointer-events-none whitespace-nowrap`}
       >
         <BodyTooltip info={info} />
       </div>
@@ -206,7 +213,7 @@ export function HeroSky() {
           block selection of nearby hero text; only the small hit area on the
           body receives pointer events. */}
       {enabled && bodyInfo ? (
-        <div className="absolute inset-0 z-10 pointer-events-none">
+        <div className="absolute inset-0 z-30 pointer-events-none">
           <BodyMarker info={bodyInfo} />
         </div>
       ) : null}
