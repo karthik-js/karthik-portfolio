@@ -9,7 +9,7 @@ import {
   moonPhaseName,
   radToDeg,
 } from "./metrics";
-import type { BodyInfo } from "./SkyCanvas";
+import type { BodyInfo, SkyBodies } from "./SkyCanvas";
 
 const SkyCanvas = dynamic(
   () => import("./SkyCanvas").then((m) => m.SkyCanvas),
@@ -176,7 +176,7 @@ export function HeroSky() {
   const enabled = webglAvailable && viewportEligible;
 
   const hostRef = useRef<HTMLDivElement | null>(null);
-  const [bodyInfo, setBodyInfo] = useState<BodyInfo | null>(null);
+  const [bodies, setBodies] = useState<SkyBodies>({ sun: null, moon: null });
 
   const handlePaletteChange = (illumination: number, tintHsl: string) => {
     const host = hostRef.current;
@@ -204,7 +204,7 @@ export function HeroSky() {
             <SkyCanvas
               reducedMotion={reducedMotion}
               onPaletteChange={handlePaletteChange}
-              onBodyChange={setBodyInfo}
+              onBodiesChange={setBodies}
             />
           </div>
         ) : null}
@@ -213,9 +213,10 @@ export function HeroSky() {
           hoverable. The wrapper itself is pointer-events-none so it doesn't
           block selection of nearby hero text; only the small hit area on the
           body receives pointer events. */}
-      {enabled && bodyInfo ? (
+      {enabled ? (
         <div className="absolute inset-0 z-30 pointer-events-none">
-          <BodyMarker info={bodyInfo} />
+          {bodies.sun ? <BodyMarker info={bodies.sun} /> : null}
+          {bodies.moon ? <BodyMarker info={bodies.moon} /> : null}
         </div>
       ) : null}
     </>

@@ -131,7 +131,7 @@ function smoothstep(edge0: number, edge1: number, x: number) {
 export type SkyCanvasProps = {
   reducedMotion?: boolean;
   onPaletteChange?: (illumination: number, tintHsl: string) => void;
-  onBodyChange?: (info: BodyInfo) => void;
+  onBodiesChange?: (bodies: SkyBodies) => void;
 };
 
 export type BodyInfo = {
@@ -144,10 +144,15 @@ export type BodyInfo = {
   location: ViewerLocation;
 };
 
+export type SkyBodies = {
+  sun: BodyInfo | null;
+  moon: BodyInfo | null;
+};
+
 export function SkyCanvas({
   reducedMotion = false,
   onPaletteChange,
-  onBodyChange,
+  onBodiesChange,
 }: SkyCanvasProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const location = useViewerLocation();
@@ -156,7 +161,7 @@ export function SkyCanvas({
   // Latest values for the RAF loop without re-creating the renderer.
   const celestialRef = useRef(celestial);
   const onPaletteChangeRef = useRef(onPaletteChange);
-  const onBodyChangeRef = useRef(onBodyChange);
+  const onBodiesChangeRef = useRef(onBodiesChange);
   useEffect(() => {
     celestialRef.current = celestial;
   }, [celestial]);
@@ -164,37 +169,42 @@ export function SkyCanvas({
     onPaletteChangeRef.current = onPaletteChange;
   }, [onPaletteChange]);
   useEffect(() => {
-    onBodyChangeRef.current = onBodyChange;
-  }, [onBodyChange]);
+    onBodiesChangeRef.current = onBodiesChange;
+  }, [onBodiesChange]);
 
-  // Emit a body update when celestial state or location changes. We pick the
-  // body by which is *clearly above the horizon* — sun preferred during day,
-  // moon at night. Both can have non-zero rendered visibility during dawn/dusk
-  // overlap; in that window, prefer whichever is higher in the sky.
+  // Emit both bodies whenever celestial state or location changes. Each one is
+  // included only when it's at least near the horizon AND its rendered
+  // visibility on screen is non-trivial — that guarantees we never offer a
+  // hover marker for a body that isn't actually being drawn.
   useEffect(() => {
     const sunProj = projectAltAz(celestial.sunAltitude, celestial.sunAzimuth);
     const moonProj = projectAltAz(celestial.moonAltitude, celestial.moonAzimuth);
-    const sunAboveHorizon = celestial.sunAltitude > -0.1; // ~ -6°
-    const moonAboveHorizon = celestial.moonAltitude > -0.1;
-    let useSun: boolean;
-    if (sunAboveHorizon && !moonAboveHorizon) useSun = true;
-    else if (!sunAboveHorizon && moonAboveHorizon) useSun = false;
-    else if (!sunAboveHorizon && !moonAboveHorizon) {
-      // Both deep below — fall back to whichever is closer to the horizon.
-      useSun = celestial.sunAltitude >= celestial.moonAltitude;
-    } else {
-      // Both up — pick the higher one (more visually prominent).
-      useSun = celestial.sunAltitude >= celestial.moonAltitude;
-    }
-    const proj = useSun ? sunProj : moonProj;
-    onBodyChangeRef.current?.({
-      body: useSun ? "sun" : "moon",
-      xNorm: proj.x,
-      yNorm: proj.y,
-      visible: proj.visible,
-      celestial,
-      location,
-    });
+    const sunDeg = (celestial.sunAltitude * 180) / Math.PI;
+    const moonDaylight = smoothstep(-3, 15, sunDeg);
+    const moonRenderedAlpha = moonProj.visible * (1 - 0.82 * moonDaylight);
+    const sunInfo: BodyInfo | null =
+      sunProj.visible > 0.05
+        ? {
+            body: "sun",
+            xNorm: sunProj.x,
+            yNorm: sunProj.y,
+            visible: sunProj.visible,
+            celestial,
+            location,
+          }
+        : null;
+    const moonInfo: BodyInfo | null =
+      moonRenderedAlpha > 0.06
+        ? {
+            body: "moon",
+            xNorm: moonProj.x,
+            yNorm: moonProj.y,
+            visible: moonRenderedAlpha,
+            celestial,
+            location,
+          }
+        : null;
+    onBodiesChangeRef.current?.({ sun: sunInfo, moon: moonInfo });
   }, [celestial, location]);
 
   useEffect(() => {
