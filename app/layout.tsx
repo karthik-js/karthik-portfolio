@@ -14,9 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Karthik Talam — Lead Frontend Engineer",
+  title: "Lead Frontend Engineer | Next.js & React Expert | Karthik Talam",
   description:
-    "Lead Frontend Engineer with 8+ years building high-traffic web platforms. Specialized in Next.js App Router architecture, enterprise authentication, and AI-augmented engineering workflows.",
+    "8+ years building high-performance web platforms. Expert in Next.js App Router, enterprise auth, and AI-augmented engineering workflows.",
   keywords: [
     "Lead Frontend Engineer",
     "React",
@@ -27,19 +27,36 @@ export const metadata: Metadata = {
     "Frontend Architecture",
   ],
   authors: [{ name: "Karthik Talam", url: "https://github.com/karthik-js" }],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: "index, follow",
+  },
+  alternates: { canonical: "https://karthik.run" },
   openGraph: {
     type: "website",
     locale: "en_US",
     title: "Karthik Talam — Lead Frontend Engineer",
     description:
-      "Building high-traffic web platforms — from enterprise B2B e-commerce to AI-augmented engineering workflows.",
+      "8+ years building high-performance web platforms. Expert in Next.js App Router, enterprise auth, and AI-augmented engineering workflows.",
     siteName: "Karthik Talam Portfolio",
+    images: [
+      {
+        url: "https://karthik.run/og-image.svg",
+        width: 1200,
+        height: 630,
+        alt: "Karthik Talam — Lead Frontend Engineer",
+        type: "image/svg+xml",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Karthik Talam — Lead Frontend Engineer",
     description:
-      "Building high-traffic web platforms — from enterprise B2B e-commerce to AI-augmented engineering workflows.",
+      "8+ years building high-performance web platforms. Expert in Next.js App Router, enterprise auth, and AI-augmented engineering workflows.",
+    images: ["https://karthik.run/twitter-image.svg"],
+    creator: "@karthik_js",
   },
 };
 
@@ -55,6 +72,36 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-screen">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "Person",
+                  "@id": "https://karthik.run/#person",
+                  "name": "Karthik Talam",
+                  "jobTitle": "Lead Frontend Engineer",
+                  "url": "https://karthik.run",
+                  "email": "karthiktalam8@gmail.com",
+                  "image": "https://karthik.run/karthik-profile.jpg",
+                  "sameAs": [
+                    "https://github.com/karthik-js",
+                    "https://www.linkedin.com/in/karthik-talam/"
+                  ]
+                },
+                {
+                  "@type": "WebSite",
+                  "@id": "https://karthik.run/#website",
+                  "url": "https://karthik.run",
+                  "name": "Karthik Talam Portfolio",
+                  "description": "8+ years building high-performance web platforms. Expert in Next.js App Router, enterprise auth, and AI-augmented engineering workflows."
+                }
+              ]
+            })
+          }}
+        />
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
