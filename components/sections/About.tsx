@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
+import Image from "next/image";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
@@ -84,8 +85,21 @@ export function About() {
             </motion.div>
           </div>
 
-          {/* Right: Stats */}
+          {/* Right: Photo + Stats */}
           <div>
+            <motion.div variants={fadeUp} className="mb-6 flex justify-center">
+              <div className="relative w-48 h-48 sm:w-56 sm:h-56 rounded-full overflow-hidden border-2 border-accent/20 shadow-lg shadow-accent/5">
+                <Image
+                  src="/karthik-profile.jpg"
+                  alt="Karthik Talam"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 192px, 224px"
+                  priority
+                />
+              </div>
+            </motion.div>
+
             <motion.div
               className="grid grid-cols-2 gap-4"
               variants={{ show: { transition: { staggerChildren: 0.1 } } }}
@@ -100,9 +114,7 @@ export function About() {
                     {value}
                   </p>
 
-                  <p className="mt-2 text-sm text-muted">
-                    {label}
-                  </p>
+                  <p className="mt-2 text-sm text-muted">{label}</p>
                 </motion.div>
               ))}
             </motion.div>
@@ -116,9 +128,7 @@ export function About() {
               </p>
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center">
-                  <span className="text-xs font-bold text-accent">
-                    PS
-                  </span>
+                  <span className="text-xs font-bold text-accent">PS</span>
                 </div>
                 <div>
                   <p className="font-semibold text-foreground">
