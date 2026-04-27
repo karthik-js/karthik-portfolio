@@ -36,7 +36,7 @@ const contacts = [
 export function Contact() {
   return (
     <section id="contact" className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-3xl mx-auto text-center">
+      <div className="max-w-3xl mx-auto text-left lg:text-center">
         <motion.div
           initial="hidden"
           whileInView="show"
@@ -59,7 +59,7 @@ export function Contact() {
           </motion.h2>
           <motion.p
             variants={fadeUp}
-            className="text-muted text-lg mb-16 max-w-xl mx-auto leading-relaxed"
+            className="text-muted text-lg mb-16 max-w-xl lg:mx-auto leading-relaxed"
           >
             I&apos;m selective about what I take on — but if you&apos;re
             building something hard, that&apos;s exactly where I do my best

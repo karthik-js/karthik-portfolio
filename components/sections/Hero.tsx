@@ -23,7 +23,7 @@ export function Hero() {
 
   return (
     <section
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8"
+      className="relative min-h-screen flex flex-col items-start lg:items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8"
       aria-label="Hero"
     >
       {/* WebGL celestial backdrop (sun/moon based on visitor's local sky) */}
@@ -44,7 +44,7 @@ export function Hero() {
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,var(--color-accent)/12%,transparent)]" />
 
       <motion.div
-        className="max-w-4xl w-full mx-auto text-center"
+        className="max-w-4xl w-full mx-auto text-left lg:text-center"
         variants={stagger}
         initial="hidden"
         animate="show"
@@ -70,7 +70,7 @@ export function Hero() {
         {/* One-liner */}
         <motion.p
           variants={fadeUp}
-          className="text-lg sm:text-xl text-muted max-w-2xl mx-auto mb-10 leading-relaxed"
+          className="text-lg sm:text-xl text-muted max-w-2xl lg:mx-auto mb-10 leading-relaxed"
         >
           20% faster pages. 35% faster shipping. 10 engineers led.
           <br className="hidden sm:block" />
@@ -80,7 +80,7 @@ export function Hero() {
         {/* CTAs */}
         <motion.div
           variants={fadeUp}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
+          className="flex flex-col sm:flex-row items-start lg:items-center justify-start lg:justify-center gap-4 mb-16"
         >
           <Button
             size="lg"
@@ -111,7 +111,7 @@ export function Hero() {
         {/* Social links */}
         <motion.div
           variants={fadeUp}
-          className="flex items-center justify-center gap-4"
+          className="flex items-center justify-start lg:justify-center gap-4"
         >
           {[
             {
