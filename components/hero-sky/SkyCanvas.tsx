@@ -122,6 +122,12 @@ const FRAG = /* glsl */ `
 import type { CelestialState } from "./useCelestialState";
 import type { ViewerLocation } from "./useViewerLocation";
 
+// GLSL-style smoothstep on the JS side for shaping visibility curves.
+function smoothstep(edge0: number, edge1: number, x: number) {
+  const t = Math.min(1, Math.max(0, (x - edge0) / (edge1 - edge0)));
+  return t * t * (3 - 2 * t);
+}
+
 export type SkyCanvasProps = {
   reducedMotion?: boolean;
   onPaletteChange?: (illumination: number, tintHsl: string) => void;
@@ -163,11 +169,17 @@ export function SkyCanvas({
 
   // Emit a body update when celestial state or location changes (~ once per minute),
   // so the host can position a hover marker without per-frame React updates.
+  // We pick whichever body is most prominent in the sky right now (highest
+  // visibility), so the tooltip always points at the body the viewer is most
+  // likely focused on. During dawn/dusk overlap, this hands off smoothly.
   useEffect(() => {
     const sunProj = projectAltAz(celestial.sunAltitude, celestial.sunAzimuth);
     const moonProj = projectAltAz(celestial.moonAltitude, celestial.moonAzimuth);
     const sunDeg = (celestial.sunAltitude * 180) / Math.PI;
-    const useSun = sunDeg > -6;
+    const moonDaylight = smoothstep(-3, 15, sunDeg); // 0 night → 1 bright day
+    const sunScore = sunProj.visible;
+    const moonScore = moonProj.visible * (1 - 0.82 * moonDaylight);
+    const useSun = sunScore >= moonScore;
     const proj = useSun ? sunProj : moonProj;
     onBodyChangeRef.current?.({
       body: useSun ? "sun" : "moon",
@@ -269,15 +281,16 @@ export function SkyCanvas({
       (uniforms.uSunPos.value as THREE.Vector2).set(sunProj.x, sunProj.y);
       (uniforms.uMoonPos.value as THREE.Vector2).set(moonProj.x, moonProj.y);
 
-      // Choose which body is "prominent": sun if it's above civil-dusk; otherwise moon.
+      // Render BOTH bodies whenever they're above (or near) the horizon so
+      // dawn/dusk transitions are continuous (e.g. moon setting while sun
+      // rises near a full moon). Each body's own altitude-based visibility
+      // already fades it out below the horizon.
+      // The moon, however, is heavily attenuated in bright daylight so it
+      // doesn't pop against a blue sky — real daytime moons look pale.
       const sunDeg = (c.sunAltitude * 180) / Math.PI;
-      if (sunDeg > -6) {
-        uniforms.uSunVisible.value = sunProj.visible;
-        uniforms.uMoonVisible.value = 0;
-      } else {
-        uniforms.uSunVisible.value = 0;
-        uniforms.uMoonVisible.value = moonProj.visible;
-      }
+      const moonDaylight = smoothstep(-3, 15, sunDeg); // 0 night → 1 bright day
+      uniforms.uSunVisible.value = sunProj.visible;
+      uniforms.uMoonVisible.value = moonProj.visible * (1 - 0.82 * moonDaylight);
       uniforms.uMoonPhase.value = c.moonPhase;
       uniforms.uMoonFraction.value = c.moonFraction;
       uniforms.uStarsAlpha.value = palette.starsAlpha;
