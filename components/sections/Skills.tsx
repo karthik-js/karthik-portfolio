@@ -22,7 +22,7 @@ export function Skills() {
             Skills
           </motion.p>
           <motion.h2 variants={fadeUp} className="text-3xl sm:text-4xl font-bold text-foreground mb-4 leading-tight">
-            What I Work With
+            How I Build
           </motion.h2>
           <motion.p variants={fadeUp} className="text-muted max-w-xl mb-16">
             Tools and technologies I reach for when building products.

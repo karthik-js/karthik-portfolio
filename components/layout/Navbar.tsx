@@ -113,7 +113,7 @@ export function Navbar() {
                   <button
                     onClick={() => handleNav(link.href)}
                     aria-current={
-                      activeSection === link.href.slice(1) ? "true" : undefined
+                      activeSection === link.href.slice(1) ? "page" : undefined
                     }
                     className={cn(
                       "px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 cursor-pointer",
@@ -191,7 +191,7 @@ export function Navbar() {
                       onClick={() => handleNav(link.href)}
                       aria-current={
                         activeSection === link.href.slice(1)
-                          ? "true"
+                          ? "page"
                           : undefined
                       }
                       className={cn(

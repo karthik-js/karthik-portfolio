@@ -49,8 +49,7 @@ export function Hero() {
         <motion.div variants={fadeUp} className="mb-6">
           <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium border border-accent/30 bg-accent/10 text-accent">
             <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-            Lead Frontend Engineer · Next.js Platform Architecture ·
-            AI-Augmented Engineering
+            Lead Frontend Engineer · Open to New Roles
           </span>
         </motion.div>
 
@@ -69,8 +68,9 @@ export function Hero() {
           variants={fadeUp}
           className="text-lg sm:text-xl text-muted max-w-2xl mx-auto mb-10 leading-relaxed"
         >
-          Building high-traffic web platforms that scale — from enterprise B2B
-          e-commerce to AI-augmented engineering workflows.
+          20% faster pages. 35% faster shipping. 10 engineers led.
+          <br className="hidden sm:block" />
+          This is what leading frontend looks like.
         </motion.p>
 
         {/* CTAs */}

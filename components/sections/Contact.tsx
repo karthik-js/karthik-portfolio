@@ -53,16 +53,17 @@ export function Contact() {
             variants={fadeUp}
             className="text-3xl sm:text-5xl font-bold text-foreground mb-6 leading-tight"
           >
-            Let&apos;s Build
+            Working on something
             <br />
-            <span className="text-accent">Something Great</span>
+            <span className="text-accent">ambitious?</span>
           </motion.h2>
           <motion.p
             variants={fadeUp}
             className="text-muted text-lg mb-16 max-w-xl mx-auto leading-relaxed"
           >
-            Whether you have a project in mind, want to collaborate, or just
-            want to say hi — my inbox is always open.
+            I&apos;m selective about what I take on — but if you&apos;re
+            building something hard, that&apos;s exactly where I do my best
+            work.
           </motion.p>
 
           <motion.div

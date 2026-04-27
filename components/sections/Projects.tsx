@@ -1,7 +1,8 @@
 'use client'
 
-import { motion, type Variants } from 'framer-motion'
-import { ExternalLink } from 'lucide-react'
+import { AnimatePresence, motion, type Transition, type Variants } from 'framer-motion'
+import { ExternalLink, Star } from 'lucide-react'
+import { useState } from 'react'
 import { GitHubIcon } from '@/components/ui/BrandIcons'
 import { projects } from '@/data/projects'
 import { Badge } from '@/components/ui/Badge'
@@ -11,7 +12,20 @@ const fadeUp: Variants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
 }
 
+const enterTransition: Transition = { duration: 0.4, ease: 'easeOut' }
+const exitTransition: Transition = { duration: 0.2 }
+
+const cardAnim = {
+  initial: { opacity: 0, y: 24 },
+  animate: { opacity: 1, y: 0, transition: enterTransition },
+  exit: { opacity: 0, y: 12, transition: exitTransition },
+}
+
 export function Projects() {
+  const [showAll, setShowAll] = useState(false)
+  const featured = projects.filter((p) => p.featured)
+  const displayed = showAll ? projects : featured
+
   return (
     <section id="projects" className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
@@ -28,64 +42,84 @@ export function Projects() {
             Selected Work
           </motion.h2>
           <motion.p variants={fadeUp} className="text-muted max-w-xl mb-16">
-            A selection of projects I&apos;ve built — from client tools to developer utilities.
+            Side projects with real users, real metrics, and real code.
           </motion.p>
 
-          <motion.div
-            className="grid sm:grid-cols-2 gap-6"
-            variants={{ show: { transition: { staggerChildren: 0.12 } } }}
-          >
-            {projects.map((project) => (
-              <motion.article
-                key={project.name}
-                variants={fadeUp}
-                className="group relative p-6 rounded-2xl border border-border bg-card hover:border-accent/50 hover:-translate-y-1 transition-all duration-300"
-              >
-                <div className="flex items-start justify-between mb-4">
-                  <h3 className="text-lg font-semibold text-foreground group-hover:text-accent transition-colors">
-                    {project.name}
-                  </h3>
-                  <div className="flex items-center gap-2 ml-4">
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`${project.name} GitHub`}
-                      className="text-muted hover:text-foreground transition-colors"
-                    >
-                      <GitHubIcon size={16} />
-                    </a>
-                    {project.live && (
+          <div className="grid sm:grid-cols-2 gap-6">
+            <AnimatePresence mode="popLayout">
+              {displayed.map((project) => (
+                <motion.article
+                  key={project.name}
+                  {...cardAnim}
+                  layout
+                  className="group relative p-6 rounded-2xl border border-border bg-card hover:border-accent/50 hover:-translate-y-1 transition-colors duration-300"
+                >
+                  <div className="flex items-start justify-between mb-4">
+                    <h3 className="text-lg font-semibold text-foreground group-hover:text-accent transition-colors">
+                      {project.name}
+                    </h3>
+                    <div className="flex items-center gap-2 ml-4 shrink-0">
+                      {project.stars != null && (
+                        <span className="inline-flex items-center gap-1 text-xs text-muted font-medium">
+                          <Star size={12} className="text-yellow-400 fill-yellow-400" aria-hidden="true" />
+                          {project.stars}
+                        </span>
+                      )}
                       <a
-                        href={project.live}
+                        href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label={`${project.name} live demo`}
+                        aria-label={`${project.name} GitHub`}
                         className="text-muted hover:text-foreground transition-colors"
                       >
-                        <ExternalLink size={16} />
+                        <GitHubIcon size={16} />
                       </a>
-                    )}
+                      {project.live && (
+                        <a
+                          href={project.live}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${project.name} live demo`}
+                          className="text-muted hover:text-foreground transition-colors"
+                        >
+                          <ExternalLink size={16} />
+                        </a>
+                      )}
+                    </div>
                   </div>
-                </div>
 
-                <p className="text-sm text-muted mb-5 leading-relaxed">
-                  {project.description}
-                </p>
+                  <p className="text-sm text-muted mb-3 leading-relaxed">
+                    {project.description}
+                  </p>
 
-                <div className="flex flex-wrap gap-2">
-                  {project.stack.map((tech) => (
-                    <Badge key={tech}>{tech}</Badge>
-                  ))}
-                </div>
+                  {project.impact && (
+                    <p className="text-xs text-accent font-medium mb-4 leading-relaxed">
+                      → {project.impact}
+                    </p>
+                  )}
 
-                {/* Hover accent line */}
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 rounded-b-2xl bg-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
-              </motion.article>
-            ))}
-          </motion.div>
+                  <div className="flex flex-wrap gap-2">
+                    {project.stack.map((tech) => (
+                      <Badge key={tech}>{tech}</Badge>
+                    ))}
+                  </div>
 
-          <motion.div variants={fadeUp} className="mt-12 text-center">
+                  {/* Hover accent line */}
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 rounded-b-2xl bg-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                </motion.article>
+              ))}
+            </AnimatePresence>
+          </div>
+
+          <motion.div variants={fadeUp} className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
+            {projects.length > featured.length && (
+              <button
+                onClick={() => setShowAll((v) => !v)}
+                className="text-sm text-muted hover:text-foreground border border-border hover:border-accent/50 px-4 py-2 rounded-lg transition-all duration-200"
+              >
+                {showAll ? '← Show featured only' : `Show all ${projects.length} projects →`}
+              </button>
+            )}
             <a
               href="https://github.com/karthik-js"
               target="_blank"

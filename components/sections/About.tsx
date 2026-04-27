@@ -38,14 +38,19 @@ export function About() {
               variants={fadeUp}
               className="text-3xl sm:text-4xl font-bold text-foreground mb-8 leading-tight"
             >
-              Engineer by craft,
+              I make teams ship
               <br />
-              <span className="text-accent">builder by nature</span>
+              <span className="text-accent">better — and faster.</span>
             </motion.h2>
             <motion.div
               variants={fadeUp}
               className="space-y-5 text-muted leading-relaxed"
             >
+              <p>
+                When I&apos;m not building products, I&apos;m designing
+                AI-augmented development workflows, contributing to open source,
+                and automating everything I possibly can.
+              </p>
               <p>
                 I&apos;m a Lead Frontend Engineer with 8+ years building
                 high-traffic web platforms — from startup MVPs to
@@ -58,11 +63,6 @@ export function About() {
                 tracks on a TypeScript monorepo, where I drove a 20% page-load
                 improvement, scaled test coverage to 4,500+ tests, and pioneered
                 an agentic AI workflow that cut ticket closure time by ~35%.
-              </p>
-              <p>
-                When I&apos;m not building products, I&apos;m designing
-                AI-augmented development workflows, contributing to open source,
-                and automating everything I possibly can.
               </p>
             </motion.div>
 
@@ -96,6 +96,8 @@ export function About() {
                   className="object-cover"
                   sizes="(max-width: 640px) 192px, 224px"
                   priority
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAABQME/8QAIhAAAQMEAgMAAAAAAAAAAAAAAQIDBAUREiExQVH/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AqO08Hna+VzMiymU4bsJiWomNy2iA4kLBKSRz7Hin2VHHX2RGjSHnGFPISW0qUpCVAlIPByM5x96KKAf/9k="
                 />
               </div>
             </motion.div>

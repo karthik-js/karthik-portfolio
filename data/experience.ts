@@ -2,7 +2,9 @@ export interface ExperienceItem {
   role: string;
   company: string;
   period: string;
+  industry: string;
   bullets: string[];
+  earlyCareer?: boolean;
 }
 
 export const experience: ExperienceItem[] = [
@@ -10,6 +12,7 @@ export const experience: ExperienceItem[] = [
     role: "Lead Experience Engineer",
     company: "Publicis Sapient",
     period: "Nov 2024 – Present",
+    industry: "Retail / B2B Commerce",
     bullets: [
       "Tech lead on a multi-market B2B e-commerce platform (TypeScript monorepo), leading 2 frontend tracks (~10 engineers); own architecture decisions and serve as default code reviewer across the repository",
       "Led a dedicated 3-engineer performance squad that delivered ~20% faster page loads — improving Core Web Vitals (LCP, CLS, INP) across the application",
@@ -23,6 +26,7 @@ export const experience: ExperienceItem[] = [
     role: "Senior Frontend Engineer",
     company: "Nordek Technologies",
     period: "Jan 2024 – Aug 2024",
+    industry: "Fintech / Web3",
     bullets: [
       "Stabilized Norpay post-launch — triaged UX friction points and shipped targeted performance fixes that cut usability-related support tickets by 15%",
       "Architected and launched the GQpay application, directing a team of two UI engineers and one backend engineer; completed the project ahead of schedule, increasing market presence across the EU",
@@ -33,6 +37,7 @@ export const experience: ExperienceItem[] = [
     role: "Senior Product Developer",
     company: "Backstage Technologies",
     period: "Aug 2021 – Dec 2023",
+    industry: "Creator Economy",
     bullets: [
       "Led the redesign of the Backstage landing page using Next.js, integrating multiple mini-apps (blogs, feature videos, sign-up flows) into a unified experience",
       "Designed and built creator tools web app that doubled organic sign-ups; platform supported a 4x scale spike during paid acquisition campaigns",
@@ -46,6 +51,7 @@ export const experience: ExperienceItem[] = [
     role: "Senior Software Engineer",
     company: "Mindship Technologies",
     period: "Aug 2020 – Jul 2021",
+    industry: "Marine Marketplace",
     bullets: [
       "Led 3 engineers building Harbormoor's boat listing marketplace and SEO layer — achieved first-page Google rankings for targeted marine service queries",
       "Redesigned service enquiry flow, leading to a 10% increase in sales",
@@ -54,9 +60,11 @@ export const experience: ExperienceItem[] = [
     ],
   },
   {
-    role: "MERN Developer",
+    role: "Full-Stack Engineer",
     company: "Lavupos Technologies",
     period: "Aug 2019 – Apr 2020",
+    industry: "HR Compliance",
+    earlyCareer: true,
     bullets: [
       "Delivered full-suite POSH compliance product (Conduct) in 4 months for organizations with 1000+ employees — registration, complaint tracking, video-based learning, and interactive assessments",
       "Built dashboards for complaint management and learning modules; designed admin interfaces for company-wide POSH initiatives",
@@ -66,6 +74,8 @@ export const experience: ExperienceItem[] = [
     role: "Full-Stack Developer",
     company: "Suraaga Technologies",
     period: "Jun 2017 – Jul 2019",
+    industry: "EdTech / AI",
+    earlyCareer: true,
     bullets: [
       "Automated scoring systems using TensorFlow ML models; built a scalable transcription service with AWS Lambda and S3",
       "Designed REST APIs (Node.js, Koa.js) supporting microservices architecture; containerized applications with Docker and streamlined CI/CD pipelines via Jenkins",

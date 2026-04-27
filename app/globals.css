@@ -28,6 +28,10 @@
   --grid-line: rgba(0, 0, 0, 0.04);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 *,
 *::before,
 *::after {
