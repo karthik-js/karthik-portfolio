@@ -1,5 +1,6 @@
 "use client";
 
+import { HeroSky } from "@/components/hero-sky/HeroSky";
 import { GitHubIcon, LinkedInIcon } from "@/components/ui/BrandIcons";
 import { Button } from "@/components/ui/Button";
 import { motion } from "framer-motion";
@@ -25,6 +26,9 @@ export function Hero() {
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8"
       aria-label="Hero"
     >
+      {/* WebGL celestial backdrop (sun/moon based on visitor's local sky) */}
+      <HeroSky />
+
       {/* Grid background */}
       <div
         className="absolute inset-0 -z-10 opacity-100"
