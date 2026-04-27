@@ -121,11 +121,12 @@ function BodyTooltip({ info }: { info: BodyInfo }) {
 }
 
 function BodyMarker({ info }: { info: BodyInfo }) {
-  if (info.visible < 0.05) return null;
+  // Always render the marker as long as the body has a sensible position.
+  // The shader's halo extends well beyond the body's "core" radius, so a
+  // small hit-area would frequently miss the visible glow. We keep the hit
+  // area generous and let the user discover it via cursor-help.
   const left = `${((info.xNorm + 1) * 50).toFixed(2)}%`;
   const top = `${((1 - info.yNorm) * 100).toFixed(2)}%`;
-  // Flip the tooltip side based on which half of the canvas the body is in
-  // so it never overflows toward the off-screen edge.
   const onLeftHalf = info.xNorm < 0;
 
   return (
@@ -142,7 +143,7 @@ function BodyMarker({ info }: { info: BodyInfo }) {
       <button
         type="button"
         aria-label={`${info.body} details`}
-        className="block w-24 h-24 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-accent cursor-help bg-transparent ring-1 ring-transparent hover:ring-accent/40 transition-[box-shadow,ring] duration-150"
+        className="block w-36 h-36 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-accent cursor-help bg-transparent ring-1 ring-transparent hover:ring-accent/30 transition duration-150"
         style={{ pointerEvents: "auto" }}
       />
       <div

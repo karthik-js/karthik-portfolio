@@ -167,19 +167,25 @@ export function SkyCanvas({
     onBodyChangeRef.current = onBodyChange;
   }, [onBodyChange]);
 
-  // Emit a body update when celestial state or location changes (~ once per minute),
-  // so the host can position a hover marker without per-frame React updates.
-  // We pick whichever body is most prominent in the sky right now (highest
-  // visibility), so the tooltip always points at the body the viewer is most
-  // likely focused on. During dawn/dusk overlap, this hands off smoothly.
+  // Emit a body update when celestial state or location changes. We pick the
+  // body by which is *clearly above the horizon* — sun preferred during day,
+  // moon at night. Both can have non-zero rendered visibility during dawn/dusk
+  // overlap; in that window, prefer whichever is higher in the sky.
   useEffect(() => {
     const sunProj = projectAltAz(celestial.sunAltitude, celestial.sunAzimuth);
     const moonProj = projectAltAz(celestial.moonAltitude, celestial.moonAzimuth);
-    const sunDeg = (celestial.sunAltitude * 180) / Math.PI;
-    const moonDaylight = smoothstep(-3, 15, sunDeg); // 0 night → 1 bright day
-    const sunScore = sunProj.visible;
-    const moonScore = moonProj.visible * (1 - 0.82 * moonDaylight);
-    const useSun = sunScore >= moonScore;
+    const sunAboveHorizon = celestial.sunAltitude > -0.1; // ~ -6°
+    const moonAboveHorizon = celestial.moonAltitude > -0.1;
+    let useSun: boolean;
+    if (sunAboveHorizon && !moonAboveHorizon) useSun = true;
+    else if (!sunAboveHorizon && moonAboveHorizon) useSun = false;
+    else if (!sunAboveHorizon && !moonAboveHorizon) {
+      // Both deep below — fall back to whichever is closer to the horizon.
+      useSun = celestial.sunAltitude >= celestial.moonAltitude;
+    } else {
+      // Both up — pick the higher one (more visually prominent).
+      useSun = celestial.sunAltitude >= celestial.moonAltitude;
+    }
     const proj = useSun ? sunProj : moonProj;
     onBodyChangeRef.current?.({
       body: useSun ? "sun" : "moon",
