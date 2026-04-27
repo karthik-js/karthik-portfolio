@@ -1,11 +1,12 @@
-import { Navbar } from '@/components/layout/Navbar'
-import { Footer } from '@/components/layout/Footer'
-import { Hero } from '@/components/sections/Hero'
-import { About } from '@/components/sections/About'
-import { Projects } from '@/components/sections/Projects'
-import { Experience } from '@/components/sections/Experience'
-import { Skills } from '@/components/sections/Skills'
-import { Contact } from '@/components/sections/Contact'
+import { BackToTop } from "@/components/BackToTop";
+import { Footer } from "@/components/layout/Footer";
+import { Navbar } from "@/components/layout/Navbar";
+import { About } from "@/components/sections/About";
+import { Contact } from "@/components/sections/Contact";
+import { Experience } from "@/components/sections/Experience";
+import { Hero } from "@/components/sections/Hero";
+import { Projects } from "@/components/sections/Projects";
+import { Skills } from "@/components/sections/Skills";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
+      <BackToTop />
     </>
-  )
+  );
 }

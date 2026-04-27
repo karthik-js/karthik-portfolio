@@ -16,14 +16,14 @@ export function Footer() {
     <footer className="border-t border-border py-8">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
         <p className="text-sm text-muted">
-          © 2026 Karthik Talam · Built with{" "}
+          © 2026 Karthik Talam · ♥{" "}
           <a
-            href="https://nextjs.org"
+            href="https://github.com/sponsors/karthik-js"
             target="_blank"
             rel="noopener noreferrer"
             className="text-foreground hover:text-accent transition-colors"
           >
-            Next.js
+            Sponsor
           </a>
         </p>
         <div className="flex items-center gap-3">

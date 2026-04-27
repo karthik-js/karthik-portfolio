@@ -1,37 +1,37 @@
-'use client'
+"use client";
 
-import { motion, type Variants } from 'framer-motion'
-import { Mail, ArrowUpRight } from 'lucide-react'
-import { GitHubIcon, LinkedInIcon } from '@/components/ui/BrandIcons'
+import { GitHubIcon, LinkedInIcon } from "@/components/ui/BrandIcons";
+import { motion, type Variants } from "framer-motion";
+import { ArrowUpRight, Mail } from "lucide-react";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
-}
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+};
 
 const contacts = [
   {
-    label: 'Email',
-    value: 'karthiktalam8@gmail.com',
-    href: 'mailto:karthiktalam8@gmail.com',
+    label: "Email",
+    value: "karthiktalam8@gmail.com",
+    href: "mailto:karthiktalam8@gmail.com",
     icon: Mail,
-    description: 'Best way to reach me',
+    description: "Best way to reach me",
   },
   {
-    label: 'LinkedIn',
-    value: '/in/karthik-talam',
-    href: 'https://www.linkedin.com/in/karthik-talam/',
+    label: "LinkedIn",
+    value: "/in/karthik-talam",
+    href: "https://www.linkedin.com/in/karthik-talam/",
     icon: LinkedInIcon,
-    description: 'Let\'s connect professionally',
+    description: "Let's connect professionally",
   },
   {
-    label: 'GitHub',
-    value: 'karthik-js',
-    href: 'https://github.com/karthik-js',
+    label: "GitHub",
+    value: "karthik-js",
+    href: "https://github.com/karthik-js",
     icon: GitHubIcon,
-    description: 'See what I\'m building',
+    description: "See what I'm building",
   },
-]
+];
 
 export function Contact() {
   return (
@@ -43,16 +43,26 @@ export function Contact() {
           viewport={{ once: true }}
           variants={{ show: { transition: { staggerChildren: 0.12 } } }}
         >
-          <motion.p variants={fadeUp} className="text-sm font-medium text-accent uppercase tracking-widest mb-4">
+          <motion.p
+            variants={fadeUp}
+            className="text-sm font-medium text-accent uppercase tracking-widest mb-4"
+          >
             Contact
           </motion.p>
-          <motion.h2 variants={fadeUp} className="text-3xl sm:text-5xl font-bold text-foreground mb-6 leading-tight">
+          <motion.h2
+            variants={fadeUp}
+            className="text-3xl sm:text-5xl font-bold text-foreground mb-6 leading-tight"
+          >
             Let&apos;s Build
             <br />
             <span className="text-accent">Something Great</span>
           </motion.h2>
-          <motion.p variants={fadeUp} className="text-muted text-lg mb-16 max-w-xl mx-auto leading-relaxed">
-            Whether you have a project in mind, want to collaborate, or just want to say hi — my inbox is always open.
+          <motion.p
+            variants={fadeUp}
+            className="text-muted text-lg mb-16 max-w-xl mx-auto leading-relaxed"
+          >
+            Whether you have a project in mind, want to collaborate, or just
+            want to say hi — my inbox is always open.
           </motion.p>
 
           <motion.div
@@ -64,8 +74,10 @@ export function Contact() {
                 key={label}
                 variants={fadeUp}
                 href={href}
-                target={href.startsWith('mailto') ? undefined : '_blank'}
-                rel={href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
+                target={href.startsWith("mailto") ? undefined : "_blank"}
+                rel={
+                  href.startsWith("mailto") ? undefined : "noopener noreferrer"
+                }
                 className="group p-6 rounded-2xl border border-border bg-card hover:border-accent/50 hover:-translate-y-1 transition-all duration-300 text-left"
               >
                 <div className="flex items-start justify-between mb-4">
@@ -77,9 +89,13 @@ export function Contact() {
                     className="text-muted group-hover:text-accent transition-colors"
                   />
                 </div>
-                <p className="font-semibold text-foreground text-sm mb-1">{label}</p>
+                <p className="font-semibold text-foreground text-sm mb-1">
+                  {label}
+                </p>
                 <p className="text-xs text-muted mb-1">{description}</p>
-                <p className="text-xs text-accent font-mono truncate">{value}</p>
+                <p className="text-xs text-accent font-mono truncate">
+                  {value}
+                </p>
               </motion.a>
             ))}
           </motion.div>
@@ -90,5 +106,5 @@ export function Contact() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }
