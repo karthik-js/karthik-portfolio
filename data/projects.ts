@@ -4,28 +4,31 @@ export interface Project {
   stack: string[];
   github: string;
   live?: string;
+  featured?: boolean;
 }
 
 export const projects: Project[] = [
   {
     name: "Know Your Government",
     description:
-      "Transparent access to Andhra Pradesh government orders and civic data — search, filter, and browse GOs with AI-generated overviews.",
+      "Open-source civic tech tool that makes Andhra Pradesh government orders searchable and understandable using AI-generated summaries — empowering citizens with transparent access to public data.",
     stack: ["SvelteKit", "TypeScript"],
     github: "https://github.com/karthik-js/knowyourgovt",
     live: "https://knowyourgovt.vercel.app",
+    featured: true,
   },
   {
     name: "AP GO Scraper",
     description:
-      "Hono API server that scrapes Andhra Pradesh Government Orders with AI overviews via Gemini 2.5 Flash, Vercel Queues, and Upstash Redis.",
+      "Serverless API pipeline that scrapes AP government orders, generates AI overviews via Gemini 2.5 Flash, and caches results with Upstash Redis — all running on Vercel's edge runtime.",
     stack: ["Hono", "TypeScript", "Gemini AI", "Upstash Redis"],
     github: "https://github.com/karthik-js/ap-go-scraper",
+    featured: true,
   },
   {
     name: "Next.js E-Commerce Starter",
     description:
-      "Demonstrates React Server Components, parallel routes, SQLite integration, and modern e-commerce patterns.",
+      "Production-ready e-commerce template showcasing Next.js 16 React Server Components, parallel routes, and SQLite — a reference architecture for building modern, high-performance storefronts.",
     stack: ["Next.js 16", "TypeScript", "SQLite"],
     github: "https://github.com/karthik-js/nextjs-ecommerce-starter",
     live: "https://nextjs-ecommerce-starter-sand.vercel.app",
@@ -33,28 +36,29 @@ export const projects: Project[] = [
   {
     name: "Next.js FCM",
     description:
-      "Firebase Cloud Messaging integration for Next.js web push notifications. 18 stars on GitHub.",
+      "Drop-in Firebase Cloud Messaging integration for Next.js web apps — the simplest way to add web push notifications. ⭐ 18 GitHub stars and actively maintained.",
     stack: ["Next.js", "JavaScript", "Firebase"],
     github: "https://github.com/karthik-js/nextjs-fcm",
+    featured: true,
   },
   {
     name: "Mailify",
     description:
-      "A modern email client web app with a clean, intuitive interface for managing your inbox efficiently.",
+      "Clean, keyboard-first email client UI built with Next.js and TypeScript — demonstrates complex state management, optimistic updates, and real-time inbox synchronization patterns.",
     stack: ["Next.js", "TypeScript"],
     github: "https://github.com/karthik-js/mailify",
   },
   {
     name: "Inventory Management System",
     description:
-      "Full-featured inventory tracking application with real-time updates, product management, and reporting.",
+      "End-to-end inventory platform with real-time stock tracking, barcode scanning support, and analytics dashboard — built for small businesses to manage products, suppliers, and order fulfillment.",
     stack: ["Next.js", "TypeScript"],
     github: "https://github.com/karthik-js/inventory-management",
   },
   {
     name: "Dotfiles & System Automation",
     description:
-      "Automates new system setup with Zsh, Homebrew, NVM, Neovim config, and developer tooling — from zero to productive in minutes.",
+      "One-command dev environment bootstrap written in Rust — sets up Zsh, Homebrew, NVM, Neovim, and all essential developer tooling from zero to fully productive in under 5 minutes.",
     stack: ["Rust", "Shell"],
     github: "https://github.com/karthik-js/dotfiles",
   },

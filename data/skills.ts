@@ -9,9 +9,12 @@ export const skillCategories: SkillCategory[] = [
     skills: [
       "React 19",
       "Next.js 15",
+      "SvelteKit",
       "TypeScript",
       "JavaScript (ES6+)",
       "Tailwind CSS",
+      "Framer Motion",
+      "TanStack Query",
       "HTML5",
       "CSS3",
     ],
@@ -36,7 +39,7 @@ export const skillCategories: SkillCategory[] = [
   },
   {
     label: "Testing",
-    skills: ["Jest", "React Testing Library", "Storybook", "SonarCloud"],
+    skills: ["Jest", "Vitest", "React Testing Library", "Storybook", "SonarCloud"],
   },
   {
     label: "DevOps & Infra",
@@ -45,10 +48,16 @@ export const skillCategories: SkillCategory[] = [
       "CI/CD",
       "Git",
       "GitHub",
+      "Vercel",
+      "Firebase",
       "Azure DevOps",
       "AWS (Lambda, S3)",
       "Datadog",
     ],
+  },
+  {
+    label: "Web3",
+    skills: ["Wagmi", "Viem", "Ethers.js"],
   },
   {
     label: "AI & DX",

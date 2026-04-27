@@ -9,8 +9,8 @@ const fadeUp: Variants = {
 
 const stats = [
   { value: "8+", label: "Years Experience" },
-  { value: "6", label: "Companies" },
-  { value: "3", label: "Countries Reached" },
+  { value: "4,500+", label: "Tests Shipped" },
+  { value: "~35%", label: "Faster Ticket Closure" },
   { value: "10+", label: "Engineers Led" },
 ];
 

@@ -56,7 +56,7 @@ export function Navbar() {
         className={cn(
           'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
           scrolled
-            ? 'bg-[var(--color-background)]/80 backdrop-blur-xl border-b border-[var(--color-border)]'
+            ? 'bg-background/80 backdrop-blur-xl border-b border-border'
             : 'bg-transparent'
         )}
       >
@@ -71,22 +71,23 @@ export function Navbar() {
             className="flex items-center gap-2 group"
             aria-label="Karthik Talam — Home"
           >
-            <div className="w-8 h-8 rounded-lg bg-[var(--color-accent)] flex items-center justify-center text-white text-sm font-bold group-hover:bg-[var(--color-accent-hover)] transition-colors">
+            <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center text-white text-sm font-bold group-hover:bg-[var(--color-accent-hover)] transition-colors">
               KT
             </div>
           </a>
 
           {/* Desktop links */}
-          <ul className="hidden md:flex items-center gap-1" role="list">
+          <ul className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => (
               <li key={link.href}>
                 <button
                   onClick={() => handleNav(link.href)}
+                  aria-current={activeSection === link.href.slice(1) ? 'true' : undefined}
                   className={cn(
                     'px-3 py-2 rounded-md text-sm font-medium transition-all duration-200',
                     activeSection === link.href.slice(1)
-                      ? 'text-[var(--color-foreground)] bg-[var(--color-card)]'
-                      : 'text-[var(--color-muted)] hover:text-[var(--color-foreground)]'
+                      ? 'text-foreground bg-card'
+                      : 'text-muted hover:text-foreground'
                   )}
                 >
                   {link.label}
@@ -103,7 +104,7 @@ export function Navbar() {
             </div>
             <ThemeToggle />
             <button
-              className="md:hidden flex items-center justify-center w-9 h-9 rounded-lg border border-[var(--color-border)] text-[var(--color-muted)] hover:text-[var(--color-foreground)] transition-colors"
+              className="md:hidden flex items-center justify-center w-9 h-9 rounded-lg border border-border text-muted hover:text-foreground transition-colors"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={mobileOpen}
@@ -130,13 +131,13 @@ export function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 bottom-0 z-50 w-72 bg-[var(--color-card)] border-l border-[var(--color-border)] md:hidden flex flex-col"
+              className="fixed top-0 right-0 bottom-0 z-50 w-72 bg-card border-l border-border md:hidden flex flex-col"
             >
-              <div className="flex items-center justify-between p-4 border-b border-[var(--color-border)]">
-                <span className="font-semibold text-[var(--color-foreground)]">Navigation</span>
+              <div className="flex items-center justify-between p-4 border-b border-border">
+                <span className="font-semibold text-foreground">Navigation</span>
                 <button
                   onClick={() => setMobileOpen(false)}
-                  className="flex items-center justify-center w-9 h-9 rounded-lg border border-[var(--color-border)] text-[var(--color-muted)]"
+                  className="flex items-center justify-center w-9 h-9 rounded-lg border border-border text-muted"
                   aria-label="Close menu"
                 >
                   <X size={18} />
@@ -150,18 +151,19 @@ export function Navbar() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.05 }}
                     onClick={() => handleNav(link.href)}
+                    aria-current={activeSection === link.href.slice(1) ? 'true' : undefined}
                     className={cn(
                       'w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-colors',
                       activeSection === link.href.slice(1)
-                        ? 'text-[var(--color-accent)] bg-[var(--color-accent)]/10'
-                        : 'text-[var(--color-muted)] hover:text-[var(--color-foreground)] hover:bg-[var(--color-background)]'
+                        ? 'text-accent bg-accent/10'
+                        : 'text-muted hover:text-foreground hover:bg-background'
                     )}
                   >
                     {link.label}
                   </motion.button>
                 ))}
               </nav>
-              <div className="mt-auto p-4 border-t border-[var(--color-border)]">
+              <div className="mt-auto p-4 border-t border-border">
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                   <span className="text-sm text-emerald-400 font-medium">Open to Work</span>

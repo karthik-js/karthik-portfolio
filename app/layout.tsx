@@ -40,22 +40,12 @@ export const metadata: Metadata = {
     description:
       "8+ years building high-performance web platforms. Expert in Next.js App Router, enterprise auth, and AI-augmented engineering workflows.",
     siteName: "Karthik Talam Portfolio",
-    images: [
-      {
-        url: "https://karthik.run/og-image.svg",
-        width: 1200,
-        height: 630,
-        alt: "Karthik Talam — Lead Frontend Engineer",
-        type: "image/svg+xml",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Karthik Talam — Lead Frontend Engineer",
     description:
       "8+ years building high-performance web platforms. Expert in Next.js App Router, enterprise auth, and AI-augmented engineering workflows.",
-    images: ["https://karthik.run/twitter-image.svg"],
     creator: "@karthik_js",
   },
 };
@@ -72,6 +62,12 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-screen">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-100 focus:px-4 focus:py-2 focus:bg-accent focus:text-white focus:rounded-lg focus:font-medium focus:outline-none"
+        >
+          Skip to main content
+        </a>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
