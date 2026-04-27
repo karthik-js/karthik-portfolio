@@ -43,15 +43,15 @@ export function Contact() {
           viewport={{ once: true }}
           variants={{ show: { transition: { staggerChildren: 0.12 } } }}
         >
-          <motion.p variants={fadeUp} className="text-sm font-medium text-[var(--color-accent)] uppercase tracking-widest mb-4">
+          <motion.p variants={fadeUp} className="text-sm font-medium text-accent uppercase tracking-widest mb-4">
             Contact
           </motion.p>
-          <motion.h2 variants={fadeUp} className="text-3xl sm:text-5xl font-bold text-[var(--color-foreground)] mb-6 leading-tight">
+          <motion.h2 variants={fadeUp} className="text-3xl sm:text-5xl font-bold text-foreground mb-6 leading-tight">
             Let&apos;s Build
             <br />
-            <span className="text-[var(--color-accent)]">Something Great</span>
+            <span className="text-accent">Something Great</span>
           </motion.h2>
-          <motion.p variants={fadeUp} className="text-[var(--color-muted)] text-lg mb-16 max-w-xl mx-auto leading-relaxed">
+          <motion.p variants={fadeUp} className="text-muted text-lg mb-16 max-w-xl mx-auto leading-relaxed">
             Whether you have a project in mind, want to collaborate, or just want to say hi — my inbox is always open.
           </motion.p>
 
@@ -66,25 +66,25 @@ export function Contact() {
                 href={href}
                 target={href.startsWith('mailto') ? undefined : '_blank'}
                 rel={href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
-                className="group p-6 rounded-2xl border border-[var(--color-border)] bg-[var(--color-card)] hover:border-[var(--color-accent)]/50 hover:-translate-y-1 transition-all duration-300 text-left"
+                className="group p-6 rounded-2xl border border-border bg-card hover:border-accent/50 hover:-translate-y-1 transition-all duration-300 text-left"
               >
                 <div className="flex items-start justify-between mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/20 flex items-center justify-center text-[var(--color-accent)] group-hover:bg-[var(--color-accent)]/20 transition-colors">
+                  <div className="w-10 h-10 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent group-hover:bg-accent/20 transition-colors">
                     <Icon size={18} />
                   </div>
                   <ArrowUpRight
                     size={16}
-                    className="text-[var(--color-muted)] group-hover:text-[var(--color-accent)] transition-colors"
+                    className="text-muted group-hover:text-accent transition-colors"
                   />
                 </div>
-                <p className="font-semibold text-[var(--color-foreground)] text-sm mb-1">{label}</p>
-                <p className="text-xs text-[var(--color-muted)] mb-1">{description}</p>
-                <p className="text-xs text-[var(--color-accent)] font-mono truncate">{value}</p>
+                <p className="font-semibold text-foreground text-sm mb-1">{label}</p>
+                <p className="text-xs text-muted mb-1">{description}</p>
+                <p className="text-xs text-accent font-mono truncate">{value}</p>
               </motion.a>
             ))}
           </motion.div>
 
-          <motion.p variants={fadeUp} className="text-sm text-[var(--color-muted)]">
+          <motion.p variants={fadeUp} className="text-sm text-muted">
             Based in India · Available for remote work worldwide
           </motion.p>
         </motion.div>
