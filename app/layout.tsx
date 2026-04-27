@@ -60,6 +60,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable}`}
+      data-scroll-behavior="smooth"
       suppressHydrationWarning
     >
       <body className="min-h-screen">
@@ -78,25 +79,26 @@ export default function RootLayout({
                 {
                   "@type": "Person",
                   "@id": "https://karthik.run/#person",
-                  "name": "Karthik Talam",
-                  "jobTitle": "Lead Frontend Engineer",
-                  "url": "https://karthik.run",
-                  "email": "karthiktalam8@gmail.com",
-                  "image": "https://karthik.run/karthik-profile.jpg",
-                  "sameAs": [
+                  name: "Karthik Talam",
+                  jobTitle: "Lead Frontend Engineer",
+                  url: "https://karthik.run",
+                  email: "karthiktalam8@gmail.com",
+                  image: "https://karthik.run/karthik-profile.jpg",
+                  sameAs: [
                     "https://github.com/karthik-js",
-                    "https://www.linkedin.com/in/karthik-talam/"
-                  ]
+                    "https://www.linkedin.com/in/karthik-talam/",
+                  ],
                 },
                 {
                   "@type": "WebSite",
                   "@id": "https://karthik.run/#website",
-                  "url": "https://karthik.run",
-                  "name": "Karthik Talam Portfolio",
-                  "description": "8+ years building high-performance web platforms. Expert in Next.js App Router, enterprise auth, and AI-augmented engineering workflows."
-                }
-              ]
-            })
+                  url: "https://karthik.run",
+                  name: "Karthik Talam Portfolio",
+                  description:
+                    "8+ years building high-performance web platforms. Expert in Next.js App Router, enterprise auth, and AI-augmented engineering workflows.",
+                },
+              ],
+            }),
           }}
         />
         <ThemeProvider>{children}</ThemeProvider>
