@@ -206,7 +206,7 @@ export function HeroSky() {
           block selection of nearby hero text; only the small hit area on the
           body receives pointer events. */}
       {enabled && bodyInfo ? (
-        <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 z-10 pointer-events-none">
           <BodyMarker info={bodyInfo} />
         </div>
       ) : null}
