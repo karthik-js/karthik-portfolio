@@ -87,7 +87,7 @@ export function Hero() {
         {/* One-liner */}
         <motion.p
           variants={fadeUp}
-          className="text-lg sm:text-xl text-foreground/70 max-w-2xl lg:mx-auto mb-8 leading-relaxed"
+          className="text-lg sm:text-xl text-foreground/70 max-w-2xl lg:mx-auto mb-10 leading-relaxed"
         >
           I build high-performance frontend platforms and lead the teams that
           ship them — faster pages, tighter pipelines, and engineering cultures
