@@ -211,35 +211,42 @@ const ShaderMaterial = ({
   });
 
   const getUniforms = useCallback(() => {
-    const preparedUniforms: Record<string, { value: unknown; type?: string }> = {};
+    const preparedUniforms: Record<string, { value: unknown; type?: string }> =
+      {};
 
     for (const uniformName in uniforms) {
       const uniform = uniforms[uniformName];
 
       switch (uniform.type) {
         case "uniform1f":
-          preparedUniforms[uniformName] = { value: uniform.value, type: "1f" };
+          preparedUniforms[uniformName] = {
+            value: uniform.value as number,
+            type: "1f",
+          };
           break;
         case "uniform3f":
           preparedUniforms[uniformName] = {
-            value: new THREE.Vector3().fromArray(uniform.value),
+            value: new THREE.Vector3().fromArray(uniform.value as number[]),
             type: "3f",
           };
           break;
         case "uniform1fv":
-          preparedUniforms[uniformName] = { value: uniform.value, type: "1fv" };
+          preparedUniforms[uniformName] = {
+            value: uniform.value as number[],
+            type: "1fv",
+          };
           break;
         case "uniform3fv":
           preparedUniforms[uniformName] = {
-            value: uniform.value.map((v: number[]) =>
-              new THREE.Vector3().fromArray(v)
+            value: (uniform.value as number[][]).map((v) =>
+              new THREE.Vector3().fromArray(v),
             ),
             type: "3fv",
           };
           break;
         case "uniform2f":
           preparedUniforms[uniformName] = {
-            value: new THREE.Vector2().fromArray(uniform.value),
+            value: new THREE.Vector2().fromArray(uniform.value as number[]),
             type: "2f",
           };
           break;
