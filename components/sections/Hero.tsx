@@ -50,7 +50,7 @@ export function Hero() {
         }}
       />
       {/* Radial gradient overlay */}
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,var(--color-accent)/12%,transparent)]" />
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,var(--primary)/12%,transparent)]" />
 
       <motion.div
         className="relative max-w-4xl w-full mx-auto text-left lg:text-center"
@@ -60,8 +60,8 @@ export function Hero() {
       >
         {/* Eyebrow */}
         <motion.div variants={fadeUp} className="mb-6">
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium border border-accent/30 bg-background/75 backdrop-blur-sm text-accent">
-            <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium border border-primary/30 bg-background/75 backdrop-blur-sm text-primary">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
             Lead Frontend Engineer · Open to New Roles
           </span>
         </motion.div>
@@ -73,7 +73,7 @@ export function Hero() {
         >
           Karthik
           <br />
-          <span className="text-accent">Talam</span>
+          <span className="text-primary">Talam</span>
         </motion.h1>
 
         {/* One-liner */}
@@ -112,7 +112,7 @@ export function Hero() {
             target="_blank"
             rel="noopener noreferrer"
             download
-            className="inline-flex w-full sm:w-auto items-center justify-center gap-2 px-7 py-3.5 rounded-lg text-base font-medium border border-[var(--color-border)] bg-[var(--color-card)] text-[var(--color-foreground)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] transition-all duration-200"
+            className="inline-flex w-full sm:w-auto items-center justify-center gap-2 px-7 py-3.5 rounded-lg text-base font-medium border border-border bg-card text-foreground hover:border-primary hover:text-primary transition-all duration-200"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -164,7 +164,7 @@ export function Hero() {
                 href.startsWith("mailto") ? undefined : "noopener noreferrer"
               }
               aria-label={label}
-              className="flex items-center justify-center w-10 h-10 rounded-lg border border-border text-muted hover:text-foreground hover:border-accent transition-all duration-200"
+              className="flex items-center justify-center w-10 h-10 rounded-lg border border-border text-muted-foreground hover:text-foreground hover:border-primary transition-all duration-200"
             >
               <Icon size={18} />
             </a>
@@ -178,7 +178,7 @@ export function Hero() {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2 }}
         onClick={() => scrollTo("about")}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-muted hover:text-foreground transition-colors"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-muted-foreground hover:text-foreground transition-colors"
         aria-label="Scroll to About"
       >
         <span className="text-xs font-medium tracking-widest uppercase">

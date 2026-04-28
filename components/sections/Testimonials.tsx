@@ -50,7 +50,7 @@ export function Testimonials() {
         >
           <motion.p
             variants={fadeUp}
-            className="text-sm font-medium text-accent uppercase tracking-widest mb-4"
+            className="text-sm font-medium text-primary uppercase tracking-widest mb-4"
           >
             Testimonials
           </motion.p>
@@ -60,7 +60,10 @@ export function Testimonials() {
           >
             What People Say
           </motion.h2>
-          <motion.p variants={fadeUp} className="text-muted max-w-xl mb-16">
+          <motion.p
+            variants={fadeUp}
+            className="text-muted-foreground max-w-xl mb-16"
+          >
             From managers, peers, and collaborators I&apos;ve worked with across
             the years.
           </motion.p>
@@ -73,19 +76,19 @@ export function Testimonials() {
               <motion.figure
                 key={i}
                 variants={fadeUp}
-                className="relative p-6 rounded-2xl border border-border bg-card hover:border-accent/30 transition-colors duration-300 flex flex-col"
+                className="relative p-6 rounded-2xl border border-border bg-card hover:border-primary/30 transition-colors duration-300 flex flex-col"
               >
                 <Quote
                   size={20}
-                  className="text-accent/40 mb-4 shrink-0"
+                  className="text-primary/40 mb-4 shrink-0"
                   aria-hidden="true"
                 />
-                <blockquote className="text-sm text-muted leading-relaxed flex-1 mb-6 italic">
+                <blockquote className="text-sm text-muted-foreground leading-relaxed flex-1 mb-6 italic">
                   &ldquo;{t.quote}&rdquo;
                 </blockquote>
                 <figcaption className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-full bg-accent/10 border border-accent/20 flex items-center justify-center shrink-0">
-                    <span className="text-xs font-bold text-accent">
+                  <div className="w-9 h-9 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+                    <span className="text-xs font-bold text-primary">
                       {t.initials}
                     </span>
                   </div>
@@ -93,7 +96,7 @@ export function Testimonials() {
                     <p className="text-sm font-semibold text-foreground">
                       {t.name}
                     </p>
-                    <p className="text-xs text-muted">
+                    <p className="text-xs text-muted-foreground">
                       {t.role} · {t.company}
                     </p>
                   </div>

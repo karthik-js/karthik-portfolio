@@ -91,7 +91,7 @@ export function Navbar() {
               className="flex items-center gap-2 group"
               aria-label="Karthik Talam — Home"
             >
-              <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center text-white text-sm font-bold group-hover:bg-[var(--color-accent-hover)] transition-colors">
+              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-primary-foreground text-sm font-bold group-hover:bg-primary/80 transition-colors">
                 KT
               </div>
             </a>
@@ -174,7 +174,7 @@ export function Navbar() {
                 </span>
                 <button
                   onClick={() => setMobileOpen(false)}
-                  className="flex items-center justify-center w-9 h-9 rounded-lg border border-border text-muted"
+                  className="flex items-center justify-center w-9 h-9 rounded-lg border border-border text-muted-foreground"
                   aria-label="Close menu"
                 >
                   <X size={18} />
@@ -197,8 +197,8 @@ export function Navbar() {
                       className={cn(
                         "w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-colors",
                         activeSection === link.href.slice(1)
-                          ? "text-accent bg-accent/10"
-                          : "text-muted hover:text-foreground hover:bg-background",
+                          ? "text-primary bg-primary/10"
+                          : "text-muted-foreground hover:text-foreground hover:bg-background",
                       )}
                     >
                       {link.label}
@@ -211,7 +211,7 @@ export function Navbar() {
                   >
                     <Link
                       href="/"
-                      className="flex items-center gap-2 px-4 py-3 rounded-lg text-sm font-medium text-muted hover:text-foreground hover:bg-background transition-colors"
+                      className="flex items-center gap-2 px-4 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-background transition-colors"
                     >
                       <ArrowLeft size={16} />
                       Back to Home

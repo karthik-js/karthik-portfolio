@@ -20,7 +20,7 @@ export function Skills() {
         >
           <motion.p
             variants={fadeUp}
-            className="text-sm font-medium text-accent uppercase tracking-widest mb-4"
+            className="text-sm font-medium text-primary uppercase tracking-widest mb-4"
           >
             Skills
           </motion.p>
@@ -30,7 +30,10 @@ export function Skills() {
           >
             How I Build
           </motion.h2>
-          <motion.p variants={fadeUp} className="text-muted max-w-xl mb-16">
+          <motion.p
+            variants={fadeUp}
+            className="text-muted-foreground max-w-xl mb-16"
+          >
             Tools and technologies I reach for when building products.
           </motion.p>
 
@@ -42,16 +45,16 @@ export function Skills() {
               <motion.div
                 key={category.label}
                 variants={fadeUp}
-                className="p-6 rounded-2xl border border-border bg-card hover:border-accent/30 transition-colors duration-300"
+                className="p-6 rounded-2xl border border-border bg-card hover:border-primary/30 transition-colors duration-300"
               >
-                <h3 className="text-xs font-semibold text-accent uppercase tracking-widest mb-4">
+                <h3 className="text-xs font-semibold text-primary uppercase tracking-widest mb-4">
                   {category.label}
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {category.skills.map((skill) => (
                     <span
                       key={skill}
-                      className="px-2.5 py-1 rounded-md text-xs font-medium bg-background border border-border text-foreground hover:border-accent/50 hover:text-accent transition-all duration-200 cursor-default"
+                      className="px-2.5 py-1 rounded-md text-xs font-medium bg-background border border-border text-foreground hover:border-primary/50 hover:text-primary transition-all duration-200 cursor-default"
                     >
                       {skill}
                     </span>

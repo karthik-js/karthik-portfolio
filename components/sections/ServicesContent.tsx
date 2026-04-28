@@ -11,7 +11,7 @@ import {
   Users,
   Zap,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
@@ -138,16 +138,14 @@ const trustedBy = [
 
 /* ════════════════════════════════════════════════════════════════ */
 export function ServicesContent() {
-  const [isIndia, setIsIndia] = useState(false);
-
-  useEffect(() => {
+  const [isIndia] = useState(() => {
     try {
       const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      setIsIndia(tz === "Asia/Kolkata" || tz === "Asia/Calcutta");
+      return tz === "Asia/Kolkata" || tz === "Asia/Calcutta";
     } catch {
-      // fallback: show USD
+      return false;
     }
-  }, []);
+  });
 
   return (
     <main className="pt-16 relative">
@@ -165,7 +163,7 @@ export function ServicesContent() {
 
       {/* ── Hero ───────────────────────────────────────────────── */}
       <section className="pt-20 pb-16 sm:pt-28 sm:pb-20 px-4 sm:px-6 lg:px-8 text-center relative overflow-hidden">
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,var(--color-accent)/10%,transparent)]" />
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,var(--primary)/10%,transparent)]" />
 
         <motion.div
           className="max-w-3xl mx-auto"
@@ -175,7 +173,7 @@ export function ServicesContent() {
         >
           <motion.p
             variants={fadeUp}
-            className="uppercase tracking-widest text-accent text-sm font-medium mb-4"
+            className="uppercase tracking-widest text-primary text-sm font-medium mb-4"
           >
             Services
           </motion.p>
@@ -187,7 +185,7 @@ export function ServicesContent() {
           </motion.h1>
           <motion.p
             variants={fadeUp}
-            className="text-lg text-muted leading-relaxed max-w-xl mx-auto"
+            className="text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto"
           >
             Available for consulting, code reviews, and fractional technical
             leadership — remote-first, worldwide.
@@ -206,7 +204,7 @@ export function ServicesContent() {
         >
           <motion.p
             variants={fadeUp}
-            className="uppercase tracking-widest text-accent text-sm font-medium text-center mb-4"
+            className="uppercase tracking-widest text-primary text-sm font-medium text-center mb-4"
           >
             Expertise
           </motion.p>
@@ -222,16 +220,16 @@ export function ServicesContent() {
               <motion.div
                 key={title}
                 variants={fadeUp}
-                className="rounded-2xl border border-border bg-card p-6 flex gap-4 hover:border-accent/50 transition-all duration-300"
+                className="rounded-2xl border border-border bg-card p-6 flex gap-4 hover:border-primary/50 transition-all duration-300"
               >
-                <div className="shrink-0 w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
-                  <Icon size={20} className="text-accent" aria-hidden="true" />
+                <div className="shrink-0 w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                  <Icon size={20} className="text-primary" aria-hidden="true" />
                 </div>
                 <div>
                   <h3 className="text-sm font-semibold text-foreground mb-1">
                     {title}
                   </h3>
-                  <p className="text-sm text-muted leading-relaxed">
+                  <p className="text-sm text-muted-foreground leading-relaxed">
                     {description}
                   </p>
                 </div>
@@ -252,7 +250,7 @@ export function ServicesContent() {
         >
           <motion.p
             variants={fadeUp}
-            className="text-xs uppercase tracking-widest text-muted font-medium mb-6"
+            className="text-xs uppercase tracking-widest text-muted-foreground font-medium mb-6"
           >
             Worked with teams at
           </motion.p>
@@ -263,7 +261,7 @@ export function ServicesContent() {
             {trustedBy.map((name) => (
               <span
                 key={name}
-                className="px-4 py-2 rounded-full border border-border text-sm font-medium text-muted"
+                className="px-4 py-2 rounded-full border border-border text-sm font-medium text-muted-foreground"
               >
                 {name}
               </span>
@@ -286,7 +284,7 @@ export function ServicesContent() {
         >
           <motion.p
             variants={fadeUp}
-            className="uppercase tracking-widest text-accent text-sm font-medium text-center mb-4"
+            className="uppercase tracking-widest text-primary text-sm font-medium text-center mb-4"
           >
             Packages
           </motion.p>
@@ -302,20 +300,20 @@ export function ServicesContent() {
               <motion.div
                 key={pkg.name}
                 variants={fadeUp}
-                className={`relative rounded-2xl border bg-card p-8 flex flex-col transition-all duration-300 hover:border-accent/50 ${
+                className={`relative rounded-2xl border bg-card p-8 flex flex-col transition-all duration-300 hover:border-primary/50 ${
                   pkg.popular
-                    ? "border-accent/60 shadow-lg shadow-accent/10"
+                    ? "border-primary/60 shadow-lg shadow-primary/10"
                     : "border-border"
                 }`}
               >
                 {pkg.popular && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-xs font-semibold bg-accent text-white shadow-md">
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-xs font-semibold bg-primary text-primary-foreground shadow-md">
                     Most Popular
                   </span>
                 )}
 
                 <div className="mb-6">
-                  <p className="text-xs uppercase tracking-widest text-muted font-medium mb-1">
+                  <p className="text-xs uppercase tracking-widest text-muted-foreground font-medium mb-1">
                     {pkg.name}
                   </p>
                   <h3 className="text-xl font-bold text-foreground mb-4">
@@ -326,18 +324,18 @@ export function ServicesContent() {
                       {isIndia ? pkg.price.inr : pkg.price.usd}
                     </span>
                   </div>
-                  <p className="text-sm text-muted">{pkg.period}</p>
+                  <p className="text-sm text-muted-foreground">{pkg.period}</p>
                 </div>
 
                 <ul className="flex flex-col gap-3 mb-8 flex-1">
                   {pkg.bullets.map((b) => (
                     <li
                       key={b}
-                      className="flex items-start gap-2 text-sm text-muted"
+                      className="flex items-start gap-2 text-sm text-muted-foreground"
                     >
                       <Check
                         size={15}
-                        className="text-accent mt-0.5 shrink-0"
+                        className="text-primary mt-0.5 shrink-0"
                         aria-hidden="true"
                       />
                       {b}
@@ -353,10 +351,10 @@ export function ServicesContent() {
                       ? undefined
                       : "noopener noreferrer"
                   }
-                  className={`inline-flex items-center justify-center px-5 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
+                  className={`inline-flex items-center justify-center px-5 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                     pkg.popular
-                      ? "bg-accent text-white hover:bg-accent-hover shadow-lg shadow-(--color-accent)/20"
-                      : "border border-border bg-card text-foreground hover:border-accent hover:text-accent"
+                      ? "bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/20"
+                      : "border border-border bg-card text-foreground hover:border-primary hover:text-primary"
                   }`}
                 >
                   {pkg.cta}
@@ -378,7 +376,7 @@ export function ServicesContent() {
         >
           <motion.p
             variants={fadeUp}
-            className="uppercase tracking-widest text-accent text-sm font-medium text-center mb-4"
+            className="uppercase tracking-widest text-primary text-sm font-medium text-center mb-4"
           >
             FAQ
           </motion.p>
@@ -394,12 +392,14 @@ export function ServicesContent() {
               <motion.div
                 key={q}
                 variants={fadeUp}
-                className="rounded-2xl border border-border bg-card p-6 hover:border-accent/50 transition-all duration-300"
+                className="rounded-2xl border border-border bg-card p-6 hover:border-primary/50 transition-all duration-300"
               >
                 <h3 className="text-sm font-semibold text-foreground mb-2">
                   {q}
                 </h3>
-                <p className="text-sm text-muted leading-relaxed">{a}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {a}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -421,13 +421,16 @@ export function ServicesContent() {
           >
             Ready to ship better software?
           </motion.h2>
-          <motion.p variants={fadeUp} className="text-lg text-muted mb-10">
+          <motion.p
+            variants={fadeUp}
+            className="text-lg text-muted-foreground mb-10"
+          >
             Let&apos;s talk about your project.
           </motion.p>
           <motion.div variants={fadeUp}>
             <a
               href="mailto:karthiktalam8@gmail.com"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-lg text-base font-medium bg-accent text-white hover:bg-accent-hover shadow-lg shadow-[var(--color-accent)]/20 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-lg text-base font-medium bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/20 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <Mail size={18} aria-hidden="true" />
               Get in Touch

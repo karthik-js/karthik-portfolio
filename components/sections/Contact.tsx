@@ -45,7 +45,7 @@ export function Contact() {
         >
           <motion.p
             variants={fadeUp}
-            className="text-sm font-medium text-accent uppercase tracking-widest mb-4"
+            className="text-sm font-medium text-primary uppercase tracking-widest mb-4"
           >
             Contact
           </motion.p>
@@ -55,11 +55,11 @@ export function Contact() {
           >
             Working on something
             <br />
-            <span className="text-accent">ambitious?</span>
+            <span className="text-primary">ambitious?</span>
           </motion.h2>
           <motion.p
             variants={fadeUp}
-            className="text-muted text-lg mb-16 max-w-xl lg:mx-auto leading-relaxed"
+            className="text-muted-foreground text-lg mb-16 max-w-xl lg:mx-auto leading-relaxed"
           >
             I&apos;m selective about what I take on — but if you&apos;re
             building something hard, that&apos;s exactly where I do my best
@@ -79,29 +79,31 @@ export function Contact() {
                 rel={
                   href.startsWith("mailto") ? undefined : "noopener noreferrer"
                 }
-                className="group p-6 rounded-2xl border border-border bg-card hover:border-accent/50 hover:-translate-y-1 transition-all duration-300 text-left"
+                className="group p-6 rounded-2xl border border-border bg-card hover:border-primary/50 hover:-translate-y-1 transition-all duration-300 text-left"
               >
                 <div className="flex items-start justify-between mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent group-hover:bg-accent/20 transition-colors">
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary group-hover:bg-primary/20 transition-colors">
                     <Icon size={18} />
                   </div>
                   <ArrowUpRight
                     size={16}
-                    className="text-muted group-hover:text-accent transition-colors"
+                    className="text-muted-foreground group-hover:text-primary transition-colors"
                   />
                 </div>
                 <p className="font-semibold text-foreground text-sm mb-1">
                   {label}
                 </p>
-                <p className="text-xs text-muted mb-1">{description}</p>
-                <p className="text-xs text-accent font-mono truncate">
+                <p className="text-xs text-muted-foreground mb-1">
+                  {description}
+                </p>
+                <p className="text-xs text-primary font-mono truncate">
                   {value}
                 </p>
               </motion.a>
             ))}
           </motion.div>
 
-          <motion.p variants={fadeUp} className="text-sm text-muted">
+          <motion.p variants={fadeUp} className="text-sm text-muted-foreground">
             Based in India · Available for remote work worldwide
           </motion.p>
         </motion.div>

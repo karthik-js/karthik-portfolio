@@ -19,7 +19,7 @@ export function BackToTop() {
       aria-label="Back to top"
       className={cn(
         "fixed bottom-6 right-6 z-50 flex items-center justify-center w-10 h-10 rounded-full",
-        "border border-border bg-card text-muted hover:text-foreground hover:border-accent",
+        "border border-border bg-card text-muted-foreground hover:text-foreground hover:border-primary",
         "transition-all duration-300 shadow-lg",
         visible
           ? "opacity-100 translate-y-0"

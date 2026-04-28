@@ -15,13 +15,13 @@ export function Footer() {
   return (
     <footer className="border-t border-border py-8">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <p className="text-sm text-muted">
+        <p className="text-sm text-muted-foreground">
           © 2026 Karthik Talam · ♥{" "}
           <a
             href="https://github.com/sponsors/karthik-js"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-foreground hover:text-accent transition-colors"
+            className="text-foreground hover:text-primary transition-colors"
           >
             Sponsor
           </a>
@@ -36,7 +36,7 @@ export function Footer() {
                 href.startsWith("mailto") ? undefined : "noopener noreferrer"
               }
               aria-label={label}
-              className="flex items-center justify-center w-8 h-8 rounded-md text-muted hover:text-foreground transition-colors"
+              className="flex items-center justify-center w-8 h-8 rounded-md text-muted-foreground hover:text-foreground transition-colors"
             >
               <Icon size={16} />
             </a>

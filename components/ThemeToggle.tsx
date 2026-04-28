@@ -56,7 +56,7 @@ export function ThemeToggle({ className }: Readonly<{ className?: string }>) {
               "flex items-center justify-center w-7 h-7 rounded-md transition-colors duration-150",
               active
                 ? "bg-background text-foreground shadow-sm"
-                : "text-muted hover:text-foreground",
+                : "text-muted-foreground hover:text-foreground",
             )}
           >
             <Icon size={14} aria-hidden="true" />

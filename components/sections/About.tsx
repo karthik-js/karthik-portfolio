@@ -30,7 +30,7 @@ export function About() {
           <div>
             <motion.p
               variants={fadeUp}
-              className="text-sm font-medium text-accent uppercase tracking-widest mb-4"
+              className="text-sm font-medium text-primary uppercase tracking-widest mb-4"
             >
               About
             </motion.p>
@@ -40,11 +40,11 @@ export function About() {
             >
               I make teams ship
               <br />
-              <span className="text-accent">better — and faster.</span>
+              <span className="text-primary">better — and faster.</span>
             </motion.h2>
             <motion.div
               variants={fadeUp}
-              className="space-y-5 text-muted leading-relaxed"
+              className="space-y-5 text-muted-foreground leading-relaxed"
             >
               <p>
                 When I&apos;m not building products, I&apos;m designing
@@ -88,7 +88,7 @@ export function About() {
           {/* Right: Photo + Stats */}
           <div>
             <motion.div variants={fadeUp} className="mb-6 flex justify-center">
-              <div className="relative w-48 h-48 sm:w-56 sm:h-56 rounded-full overflow-hidden border-2 border-accent/20 shadow-lg shadow-accent/5">
+              <div className="relative w-48 h-48 sm:w-56 sm:h-56 rounded-full overflow-hidden border-2 border-primary/20 shadow-lg shadow-primary/5">
                 <Image
                   src="/karthik-profile.jpg"
                   alt="Karthik Talam"
@@ -110,13 +110,13 @@ export function About() {
                 <motion.div
                   key={label}
                   variants={fadeUp}
-                  className="p-6 rounded-2xl border border-border bg-card group hover:border-accent/50 transition-all duration-300"
+                  className="p-6 rounded-2xl border border-border bg-card group hover:border-primary/50 transition-all duration-300"
                 >
-                  <p className="text-4xl font-bold text-foreground group-hover:text-accent transition-colors">
+                  <p className="text-4xl font-bold text-foreground group-hover:text-primary transition-colors">
                     {value}
                   </p>
 
-                  <p className="mt-2 text-sm text-muted">{label}</p>
+                  <p className="mt-2 text-sm text-muted-foreground">{label}</p>
                 </motion.div>
               ))}
             </motion.div>
@@ -129,14 +129,14 @@ export function About() {
                 Currently at
               </p>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center">
-                  <span className="text-xs font-bold text-accent">PS</span>
+                <div className="w-10 h-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center">
+                  <span className="text-xs font-bold text-primary">PS</span>
                 </div>
                 <div>
                   <p className="font-semibold text-foreground">
                     Publicis Sapient
                   </p>
-                  <p className="text-xs text-muted">
+                  <p className="text-xs text-muted-foreground">
                     Lead Experience Engineer · Nov 2024 – Present
                   </p>
                 </div>

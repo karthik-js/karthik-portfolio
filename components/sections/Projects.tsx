@@ -42,7 +42,7 @@ export function Projects() {
         >
           <motion.p
             variants={fadeUp}
-            className="text-sm font-medium text-accent uppercase tracking-widest mb-4"
+            className="text-sm font-medium text-primary uppercase tracking-widest mb-4"
           >
             Work
           </motion.p>
@@ -52,7 +52,10 @@ export function Projects() {
           >
             Selected Work
           </motion.h2>
-          <motion.p variants={fadeUp} className="text-muted max-w-xl mb-16">
+          <motion.p
+            variants={fadeUp}
+            className="text-muted-foreground max-w-xl mb-16"
+          >
             Side projects with real users, real metrics, and real code.
           </motion.p>
 
@@ -63,15 +66,15 @@ export function Projects() {
                   key={project.name}
                   {...cardAnim}
                   layout
-                  className="group relative p-6 rounded-2xl border border-border bg-card hover:border-accent/50 hover:-translate-y-1 transition-colors duration-300"
+                  className="group relative p-6 rounded-2xl border border-border bg-card hover:border-primary/50 hover:-translate-y-1 transition-colors duration-300"
                 >
                   <div className="flex items-start justify-between mb-4">
-                    <h3 className="text-lg font-semibold text-foreground group-hover:text-accent transition-colors">
+                    <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
                       {project.name}
                     </h3>
                     <div className="flex items-center gap-2 ml-4 shrink-0">
                       {project.stars != null && (
-                        <span className="inline-flex items-center gap-1 text-xs text-muted font-medium">
+                        <span className="inline-flex items-center gap-1 text-xs text-muted-foreground font-medium">
                           <Star
                             size={12}
                             className="text-yellow-400 fill-yellow-400"
@@ -85,7 +88,7 @@ export function Projects() {
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={`${project.name} GitHub`}
-                        className="text-muted hover:text-foreground transition-colors"
+                        className="text-muted-foreground hover:text-foreground transition-colors"
                       >
                         <GitHubIcon size={16} />
                       </a>
@@ -95,7 +98,7 @@ export function Projects() {
                           target="_blank"
                           rel="noopener noreferrer"
                           aria-label={`${project.name} live demo`}
-                          className="text-muted hover:text-foreground transition-colors"
+                          className="text-muted-foreground hover:text-foreground transition-colors"
                         >
                           <ExternalLink size={16} />
                         </a>
@@ -103,12 +106,12 @@ export function Projects() {
                     </div>
                   </div>
 
-                  <p className="text-sm text-muted mb-3 leading-relaxed">
+                  <p className="text-sm text-muted-foreground mb-3 leading-relaxed">
                     {project.description}
                   </p>
 
                   {project.impact && (
-                    <p className="text-xs text-accent font-medium mb-4 leading-relaxed">
+                    <p className="text-xs text-primary font-medium mb-4 leading-relaxed">
                       → {project.impact}
                     </p>
                   )}
@@ -130,7 +133,7 @@ export function Projects() {
             {projects.length > featured.length && (
               <button
                 onClick={() => setShowAll((v) => !v)}
-                className="text-sm text-muted hover:text-foreground border border-border hover:border-accent/50 px-4 py-2 rounded-lg transition-all duration-200"
+                className="text-sm text-muted-foreground hover:text-foreground border border-border hover:border-primary/50 px-4 py-2 rounded-lg transition-all duration-200"
               >
                 {showAll
                   ? "← Show featured only"
@@ -141,7 +144,7 @@ export function Projects() {
               href="https://github.com/karthik-js"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm text-muted hover:text-foreground transition-colors"
+              className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               <GitHubIcon size={16} />
               See more on GitHub
