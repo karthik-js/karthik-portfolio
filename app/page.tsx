@@ -7,6 +7,7 @@ import { Experience } from "@/components/sections/Experience";
 import { Hero } from "@/components/sections/Hero";
 import { Projects } from "@/components/sections/Projects";
 import { Skills } from "@/components/sections/Skills";
+import { DotBackground } from "@/components/ui/dot-background";
 
 export default function Home() {
   return (
@@ -14,11 +15,13 @@ export default function Home() {
       <Navbar />
       <main id="main-content">
         <Hero />
-        <About />
-        <Projects />
-        <Experience />
-        <Skills />
-        <Contact />
+        <DotBackground>
+          <About />
+          <Projects />
+          <Experience />
+          <Skills />
+          <Contact />
+        </DotBackground>
       </main>
       <Footer />
       <BackToTop />
