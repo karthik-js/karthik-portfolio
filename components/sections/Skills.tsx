@@ -1,12 +1,12 @@
-'use client'
+"use client";
 
-import { motion, type Variants } from 'framer-motion'
-import { skillCategories } from '@/data/skills'
+import { skillCategories } from "@/data/skills";
+import { motion, type Variants } from "framer-motion";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
-}
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+};
 
 export function Skills() {
   return (
@@ -18,10 +18,16 @@ export function Skills() {
           viewport={{ once: true }}
           variants={{ show: { transition: { staggerChildren: 0.1 } } }}
         >
-          <motion.p variants={fadeUp} className="text-sm font-medium text-accent uppercase tracking-widest mb-4">
+          <motion.p
+            variants={fadeUp}
+            className="text-sm font-medium text-accent uppercase tracking-widest mb-4"
+          >
             Skills
           </motion.p>
-          <motion.h2 variants={fadeUp} className="text-3xl sm:text-4xl font-bold text-foreground mb-4 leading-tight">
+          <motion.h2
+            variants={fadeUp}
+            className="text-3xl sm:text-4xl font-bold text-foreground mb-4 leading-tight"
+          >
             How I Build
           </motion.h2>
           <motion.p variants={fadeUp} className="text-muted max-w-xl mb-16">
@@ -57,5 +63,5 @@ export function Skills() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

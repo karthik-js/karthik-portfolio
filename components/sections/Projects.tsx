@@ -1,30 +1,35 @@
-'use client'
+"use client";
 
-import { AnimatePresence, motion, type Transition, type Variants } from 'framer-motion'
-import { ExternalLink, Star } from 'lucide-react'
-import { useState } from 'react'
-import { GitHubIcon } from '@/components/ui/BrandIcons'
-import { projects } from '@/data/projects'
-import { Badge } from '@/components/ui/Badge'
+import { Badge } from "@/components/ui/Badge";
+import { GitHubIcon } from "@/components/ui/BrandIcons";
+import { projects } from "@/data/projects";
+import {
+  AnimatePresence,
+  motion,
+  type Transition,
+  type Variants,
+} from "framer-motion";
+import { ExternalLink, Star } from "lucide-react";
+import { useState } from "react";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
-}
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+};
 
-const enterTransition: Transition = { duration: 0.4, ease: 'easeOut' }
-const exitTransition: Transition = { duration: 0.2 }
+const enterTransition: Transition = { duration: 0.4, ease: "easeOut" };
+const exitTransition: Transition = { duration: 0.2 };
 
 const cardAnim = {
   initial: { opacity: 0, y: 24 },
   animate: { opacity: 1, y: 0, transition: enterTransition },
   exit: { opacity: 0, y: 12, transition: exitTransition },
-}
+};
 
 export function Projects() {
-  const [showAll, setShowAll] = useState(false)
-  const featured = projects.filter((p) => p.featured)
-  const displayed = showAll ? projects : featured
+  const [showAll, setShowAll] = useState(false);
+  const featured = projects.filter((p) => p.featured);
+  const displayed = showAll ? projects : featured;
 
   return (
     <section id="projects" className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8">
@@ -35,10 +40,16 @@ export function Projects() {
           viewport={{ once: true }}
           variants={{ show: { transition: { staggerChildren: 0.1 } } }}
         >
-          <motion.p variants={fadeUp} className="text-sm font-medium text-accent uppercase tracking-widest mb-4">
+          <motion.p
+            variants={fadeUp}
+            className="text-sm font-medium text-accent uppercase tracking-widest mb-4"
+          >
             Work
           </motion.p>
-          <motion.h2 variants={fadeUp} className="text-3xl sm:text-4xl font-bold text-foreground mb-4 leading-tight">
+          <motion.h2
+            variants={fadeUp}
+            className="text-3xl sm:text-4xl font-bold text-foreground mb-4 leading-tight"
+          >
             Selected Work
           </motion.h2>
           <motion.p variants={fadeUp} className="text-muted max-w-xl mb-16">
@@ -61,7 +72,11 @@ export function Projects() {
                     <div className="flex items-center gap-2 ml-4 shrink-0">
                       {project.stars != null && (
                         <span className="inline-flex items-center gap-1 text-xs text-muted font-medium">
-                          <Star size={12} className="text-yellow-400 fill-yellow-400" aria-hidden="true" />
+                          <Star
+                            size={12}
+                            className="text-yellow-400 fill-yellow-400"
+                            aria-hidden="true"
+                          />
                           {project.stars}
                         </span>
                       )}
@@ -103,21 +118,23 @@ export function Projects() {
                       <Badge key={tech}>{tech}</Badge>
                     ))}
                   </div>
-
-                  {/* Hover accent line */}
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 rounded-b-2xl bg-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
                 </motion.article>
               ))}
             </AnimatePresence>
           </div>
 
-          <motion.div variants={fadeUp} className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <motion.div
+            variants={fadeUp}
+            className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4"
+          >
             {projects.length > featured.length && (
               <button
                 onClick={() => setShowAll((v) => !v)}
                 className="text-sm text-muted hover:text-foreground border border-border hover:border-accent/50 px-4 py-2 rounded-lg transition-all duration-200"
               >
-                {showAll ? '← Show featured only' : `Show all ${projects.length} projects →`}
+                {showAll
+                  ? "← Show featured only"
+                  : `Show all ${projects.length} projects →`}
               </button>
             )}
             <a
@@ -133,5 +150,5 @@ export function Projects() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

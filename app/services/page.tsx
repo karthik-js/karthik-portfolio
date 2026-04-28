@@ -1,9 +1,10 @@
-import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/Navbar";
 import { ServicesContent } from "@/components/sections/ServicesContent";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Frontend Consulting Services | Next.js & React Expert | Karthik Talam",
+  title:
+    "Frontend Consulting Services | Next.js & React Expert | Karthik Talam",
   description:
     "Expert frontend consulting: Next.js architecture reviews, React performance audits, code reviews, and fractional lead engineer engagements. Remote-friendly, worldwide availability.",
   alternates: {

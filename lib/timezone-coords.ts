@@ -123,7 +123,8 @@ function offsetMinutesFromTimeZone(tz: string, when: Date): number {
       hour: "numeric",
     });
     const parts = dtf.formatToParts(when);
-    const offsetPart = parts.find((p) => p.type === "timeZoneName")?.value ?? "GMT";
+    const offsetPart =
+      parts.find((p) => p.type === "timeZoneName")?.value ?? "GMT";
     const m = /GMT([+-])(\d{1,2})(?::(\d{2}))?/.exec(offsetPart);
     if (!m) return 0;
     const sign = m[1] === "+" ? 1 : -1;

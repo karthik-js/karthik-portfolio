@@ -22,7 +22,11 @@ const getMountedServer = () => false;
 
 export function ThemeToggle({ className }: Readonly<{ className?: string }>) {
   const { theme, setTheme } = useTheme();
-  const mounted = useSyncExternalStore(subscribeNoop, getMounted, getMountedServer);
+  const mounted = useSyncExternalStore(
+    subscribeNoop,
+    getMounted,
+    getMountedServer,
+  );
 
   // Until mounted, render a stable empty shell to avoid hydration flicker —
   // the resolved theme isn't known on the server.

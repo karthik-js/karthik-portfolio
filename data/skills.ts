@@ -39,7 +39,13 @@ export const skillCategories: SkillCategory[] = [
   },
   {
     label: "Testing",
-    skills: ["Jest", "Vitest", "React Testing Library", "Storybook", "SonarCloud"],
+    skills: [
+      "Jest",
+      "Vitest",
+      "React Testing Library",
+      "Storybook",
+      "SonarCloud",
+    ],
   },
   {
     label: "DevOps & Infra",

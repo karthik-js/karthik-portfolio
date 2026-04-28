@@ -1,7 +1,12 @@
 "use client";
 
 import { experience } from "@/data/experience";
-import { AnimatePresence, motion, type Transition, type Variants } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  type Transition,
+  type Variants,
+} from "framer-motion";
 import { useState } from "react";
 
 const fadeUp: Variants = {
