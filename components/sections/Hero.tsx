@@ -69,21 +69,29 @@ export function Hero() {
         {/* Name */}
         <motion.h1
           variants={fadeUp}
-          className="text-6xl sm:text-7xl md:text-8xl font-bold tracking-tight text-foreground mb-6 leading-none"
+          className="text-6xl sm:text-7xl md:text-8xl font-bold tracking-tight text-foreground mb-4 leading-none"
         >
           Karthik
           <br />
           <span className="text-primary">Talam</span>
         </motion.h1>
 
+        {/* Specialization */}
+        <motion.p
+          variants={fadeUp}
+          className="text-base sm:text-lg font-medium text-foreground/60 uppercase tracking-widest mb-6"
+        >
+          Next.js Architect · Frontend Platform · Team Lead
+        </motion.p>
+
         {/* One-liner */}
         <motion.p
           variants={fadeUp}
-          className="text-lg sm:text-xl text-foreground/70 max-w-2xl lg:mx-auto mb-10 leading-relaxed"
+          className="text-lg sm:text-xl text-foreground/70 max-w-2xl lg:mx-auto mb-8 leading-relaxed"
         >
-          20% faster pages. 35% faster shipping. 10 engineers led.
-          <br className="hidden sm:block" />
-          This is what leading frontend looks like.
+          I build high-performance frontend platforms and lead the teams that
+          ship them — faster pages, tighter pipelines, and engineering cultures
+          that scale.
         </motion.p>
 
         {/* CTAs */}
@@ -191,6 +199,17 @@ export function Hero() {
           <ArrowDown size={16} />
         </motion.div>
       </motion.button>
+
+      {/* Sky hint — explains the live sky concept */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.8 }}
+        className="absolute bottom-8 right-4 sm:right-6 lg:right-8 flex items-center gap-1.5 text-[11px] text-foreground/40 pointer-events-none select-none"
+      >
+        <span className="w-1.5 h-1.5 rounded-full bg-primary/60 animate-pulse" />
+        Live sky · based on your location · hover ☀︎
+      </motion.div>
     </section>
   );
 }
