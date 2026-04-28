@@ -1,5 +1,6 @@
 "use client";
 
+import { GlowingEffect } from "@/components/ui/glowing-effect";
 import { skillCategories } from "@/data/skills";
 import { motion, type Variants } from "framer-motion";
 
@@ -45,8 +46,9 @@ export function Skills() {
               <motion.div
                 key={category.label}
                 variants={fadeUp}
-                className="p-6 rounded-2xl border border-border bg-card hover:border-primary/30 transition-colors duration-300"
+                className="relative p-6 rounded-2xl border border-border dark:border-transparent bg-card transition-colors duration-300"
               >
+                <GlowingEffect disabled={false} proximity={64} spread={40} borderWidth={2} movementDuration={1.2} />
                 <h3 className="text-xs font-semibold text-primary uppercase tracking-widest mb-4">
                   {category.label}
                 </h3>

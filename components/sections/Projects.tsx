@@ -2,6 +2,7 @@
 
 import { Badge } from "@/components/ui/Badge";
 import { GitHubIcon } from "@/components/ui/BrandIcons";
+import { GlowingEffect } from "@/components/ui/glowing-effect";
 import { projects } from "@/data/projects";
 import {
   AnimatePresence,
@@ -66,8 +67,9 @@ export function Projects() {
                   key={project.name}
                   {...cardAnim}
                   layout
-                  className="group relative p-6 rounded-2xl border border-border bg-card hover:border-primary/50 hover:-translate-y-1 transition-colors duration-300"
+                  className="group relative p-6 rounded-2xl border border-border dark:border-transparent bg-card hover:-translate-y-0.5 transition-transform duration-300"
                 >
+                  <GlowingEffect disabled={false} proximity={64} spread={40} borderWidth={2} movementDuration={1.2} />
                   <div className="flex items-start justify-between mb-4">
                     <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
                       {project.name}

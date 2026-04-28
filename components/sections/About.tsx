@@ -1,5 +1,6 @@
 "use client";
 
+import { Scales } from "@/components/ui/scales";
 import { motion, type Variants } from "framer-motion";
 import Image from "next/image";
 
@@ -9,9 +10,9 @@ const fadeUp: Variants = {
 };
 
 const stats = [
-  { value: "8+", label: "Years Experience" },
+  { value: "8+", label: "Years Exp." },
   { value: "4,500+", label: "Tests Shipped" },
-  { value: "~35%", label: "Faster Ticket Closure" },
+  { value: "~35%", label: "Faster Shipping" },
   { value: "10+", label: "Engineers Led" },
 ];
 
@@ -86,51 +87,81 @@ export function About() {
           </div>
 
           {/* Right: Photo + Stats */}
-          <div>
-            <motion.div variants={fadeUp} className="mb-6 flex justify-center">
-              <div className="relative w-48 h-48 sm:w-56 sm:h-56 rounded-full overflow-hidden border-2 border-primary/20 shadow-lg shadow-primary/5">
-                <Image
-                  src="/karthik-profile.jpg"
-                  alt="Karthik Talam"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 640px) 192px, 224px"
-                  priority
-                  placeholder="blur"
-                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAABQME/8QAIhAAAQMEAgMAAAAAAAAAAAAAAQIDBAUREiExQVH/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AqO08Hna+VzMiymU4bsJiWomNy2iA4kLBKSRz7Hin2VHHX2RGjSHnGFPISW0qUpCVAlIPByM5x96KKAf/9k="
-                />
+          <div className="flex flex-col gap-4">
+            {/* Photo with Scales border strips */}
+            <motion.div variants={fadeUp} className="flex justify-center">
+              <div className="relative h-80 w-64 rounded-lg bg-card">
+                {/* Left strip */}
+                <div className="absolute inset-y-[-30%] -left-10 h-[160%] w-8 mask-t-from-90% mask-b-from-90%">
+                  <Scales size={8} className="rounded-lg" />
+                </div>
+                {/* Right strip */}
+                <div className="absolute inset-y-[-30%] -right-10 h-[160%] w-8 mask-t-from-90% mask-b-from-90%">
+                  <Scales size={8} className="rounded-lg" />
+                </div>
+                {/* Top strip */}
+                <div className="absolute inset-x-[-30%] -top-10 h-8 w-[160%] mask-r-from-90% mask-l-from-90%">
+                  <Scales size={8} className="rounded-lg" />
+                </div>
+                {/* Bottom strip */}
+                <div className="absolute inset-x-[-30%] -bottom-10 h-8 w-[160%] mask-r-from-90% mask-l-from-90%">
+                  <Scales size={8} className="rounded-lg" />
+                </div>
+                {/* Photo */}
+                <div className="relative z-10 h-full w-full overflow-hidden rounded-lg border border-border shadow-sm">
+                  <Image
+                    src="/karthik-profile.jpg"
+                    alt="Karthik Talam"
+                    fill
+                    className="object-cover object-top"
+                    sizes="256px"
+                    priority
+                    placeholder="blur"
+                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAABQME/8QAIhAAAQMEAgMAAAAAAAAAAAAAAQIDBAUREiExQVH/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AqO08Hna+VzMiymU4bsJiWomNy2iA4kLBKSRz7Hin2VHHX2RGjSHnGFPISW0qUpCVAlIPByM5x96KKAf/9k="
+                  />
+                </div>
               </div>
             </motion.div>
 
+            {/* Stats — 4 columns under the photo */}
             <motion.div
-              className="grid grid-cols-2 gap-4"
+              className="grid grid-cols-4 gap-3 mt-20"
               variants={{ show: { transition: { staggerChildren: 0.1 } } }}
             >
               {stats.map(({ value, label }) => (
                 <motion.div
                   key={label}
                   variants={fadeUp}
-                  className="p-6 rounded-2xl border border-border bg-card group hover:border-primary/50 transition-all duration-300"
+                  className="p-4 rounded-2xl border border-border bg-card group hover:border-primary/50 transition-all duration-300 flex flex-col items-center text-center"
                 >
-                  <p className="text-4xl font-bold text-foreground group-hover:text-primary transition-colors">
+                  <p className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors leading-tight">
                     {value}
                   </p>
-
-                  <p className="mt-2 text-sm text-muted-foreground">{label}</p>
+                  <p className="mt-1 text-xs text-muted-foreground leading-tight">
+                    {label}
+                  </p>
                 </motion.div>
               ))}
             </motion.div>
 
+            {/* Currently at */}
             <motion.div
               variants={fadeUp}
-              className="mt-4 p-6 rounded-2xl border border-border bg-card"
+              className="p-5 rounded-2xl border border-border bg-card"
             >
               <p className="text-sm font-medium text-foreground mb-3">
                 Currently at
               </p>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center">
-                  <span className="text-xs font-bold text-primary">PS</span>
+                <div className="w-10 h-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0 overflow-hidden p-1.5">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="https://www.publicissapient.com/etc.clientlibs/ps-redesign/clientlibs/clientlib-site/resources/images/PS-Logo-Positive.svg"
+                    alt="Publicis Sapient"
+                    width={28}
+                    height={28}
+                    className="w-full h-full object-contain"
+                  />
                 </div>
                 <div>
                   <p className="font-semibold text-foreground">
@@ -143,11 +174,12 @@ export function About() {
               </div>
             </motion.div>
 
+            {/* Open to work */}
             <motion.div
               variants={fadeUp}
-              className="mt-4 p-4 rounded-2xl border border-emerald-500/20 bg-emerald-500/5 flex items-center gap-3"
+              className="p-4 rounded-2xl border border-emerald-500/20 bg-emerald-500/5 flex items-center gap-3"
             >
-              <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
               <p className="text-sm text-emerald-400 font-medium">
                 Open to new opportunities
               </p>
