@@ -130,6 +130,7 @@ function smoothstep(edge0: number, edge1: number, x: number) {
 
 export type SkyCanvasProps = {
   reducedMotion?: boolean;
+  themeMode?: "light" | "dark";
   onPaletteChange?: (illumination: number, tintHsl: string) => void;
   onBodiesChange?: (bodies: SkyBodies) => void;
 };
@@ -151,20 +152,25 @@ export type SkyBodies = {
 
 export function SkyCanvas({
   reducedMotion = false,
+  themeMode = "dark",
   onPaletteChange,
   onBodiesChange,
-}: SkyCanvasProps) {
+}: Readonly<SkyCanvasProps>) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const location = useViewerLocation();
   const celestial = useCelestialState({ lat: location.lat, lon: location.lon });
 
   // Latest values for the RAF loop without re-creating the renderer.
   const celestialRef = useRef(celestial);
+  const themeModeRef = useRef(themeMode);
   const onPaletteChangeRef = useRef(onPaletteChange);
   const onBodiesChangeRef = useRef(onBodiesChange);
   useEffect(() => {
     celestialRef.current = celestial;
   }, [celestial]);
+  useEffect(() => {
+    themeModeRef.current = themeMode;
+  }, [themeMode]);
   useEffect(() => {
     onPaletteChangeRef.current = onPaletteChange;
   }, [onPaletteChange]);
@@ -178,12 +184,15 @@ export function SkyCanvas({
   // hover marker for a body that isn't actually being drawn.
   useEffect(() => {
     const sunProj = projectAltAz(celestial.sunAltitude, celestial.sunAzimuth);
-    const moonProj = projectAltAz(celestial.moonAltitude, celestial.moonAzimuth);
+    const moonProj = projectAltAz(
+      celestial.moonAltitude,
+      celestial.moonAzimuth,
+    );
     const sunDeg = (celestial.sunAltitude * 180) / Math.PI;
     const moonDaylight = smoothstep(-3, 15, sunDeg);
     const moonRenderedAlpha = moonProj.visible * (1 - 0.82 * moonDaylight);
     const sunInfo: BodyInfo | null =
-      sunProj.visible > 0.05
+      sunProj.visible > 0.01
         ? {
             body: "sun",
             xNorm: sunProj.x,
@@ -194,7 +203,7 @@ export function SkyCanvas({
           }
         : null;
     const moonInfo: BodyInfo | null =
-      moonRenderedAlpha > 0.06
+      moonRenderedAlpha > 0.01
         ? {
             body: "moon",
             xNorm: moonProj.x,
@@ -290,7 +299,12 @@ export function SkyCanvas({
       const moonProj = projectAltAz(c.moonAltitude, c.moonAzimuth);
       const moonAbove = c.moonAltitude > 0;
 
-      const palette = paletteForSunAltitude(c.sunAltitude, c.moonFraction, moonAbove);
+      const palette = paletteForSunAltitude(
+        c.sunAltitude,
+        c.moonFraction,
+        moonAbove,
+        themeModeRef.current,
+      );
 
       (uniforms.uSkyTop.value as THREE.Color).setRGB(...palette.top);
       (uniforms.uSkyBottom.value as THREE.Color).setRGB(...palette.bottom);
@@ -306,7 +320,8 @@ export function SkyCanvas({
       const sunDeg = (c.sunAltitude * 180) / Math.PI;
       const moonDaylight = smoothstep(-3, 15, sunDeg); // 0 night → 1 bright day
       uniforms.uSunVisible.value = sunProj.visible;
-      uniforms.uMoonVisible.value = moonProj.visible * (1 - 0.82 * moonDaylight);
+      uniforms.uMoonVisible.value =
+        moonProj.visible * (1 - 0.82 * moonDaylight);
       uniforms.uMoonPhase.value = c.moonPhase;
       uniforms.uMoonFraction.value = c.moonFraction;
       uniforms.uStarsAlpha.value = palette.starsAlpha;

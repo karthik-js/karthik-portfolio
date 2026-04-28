@@ -6,17 +6,17 @@ interface BadgeProps {
   variant?: 'default' | 'accent' | 'outline'
 }
 
-export function Badge({ children, className, variant = 'default' }: BadgeProps) {
+export function Badge({ children, className, variant = 'default' }: Readonly<BadgeProps>) {
   return (
     <span
       className={cn(
         'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium transition-colors',
         {
-          'bg-[var(--color-card)] border border-[var(--color-border)] text-[var(--color-muted)] hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]':
+          'bg-card border border-border text-muted hover:border-accent hover:text-accent':
             variant === 'default',
-          'bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/30 text-[var(--color-accent)]':
+          'bg-accent/10 border border-accent/30 text-accent':
             variant === 'accent',
-          'border border-[var(--color-border)] text-[var(--color-foreground)]':
+          'border border-border text-foreground':
             variant === 'outline',
         },
         className

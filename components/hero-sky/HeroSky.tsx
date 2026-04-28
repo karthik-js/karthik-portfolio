@@ -1,5 +1,6 @@
 "use client";
 
+import { useTheme } from "next-themes";
 import dynamic from "next/dynamic";
 import { useRef, useState, useSyncExternalStore } from "react";
 import {
@@ -22,8 +23,8 @@ function hasWebGL(): boolean {
     const canvas = document.createElement("canvas");
     return Boolean(
       canvas.getContext("webgl2") ||
-        canvas.getContext("webgl") ||
-        canvas.getContext("experimental-webgl"),
+      canvas.getContext("webgl") ||
+      canvas.getContext("experimental-webgl"),
     );
   } catch {
     return false;
@@ -69,9 +70,11 @@ function getEnabledServer() {
   return false;
 }
 
-function BodyTooltip({ info }: { info: BodyInfo }) {
+function BodyTooltip({ info }: Readonly<{ info: BodyInfo }>) {
   const isMoon = info.body === "moon";
-  const altRad = isMoon ? info.celestial.moonAltitude : info.celestial.sunAltitude;
+  const altRad = isMoon
+    ? info.celestial.moonAltitude
+    : info.celestial.sunAltitude;
   const azRad = isMoon ? info.celestial.moonAzimuth : info.celestial.sunAzimuth;
   const altDeg = radToDeg(altRad);
   const compassDeg = azimuthToCompass(azRad);
@@ -83,7 +86,7 @@ function BodyTooltip({ info }: { info: BodyInfo }) {
     altDeg < 0 ? `${Math.abs(altDeg).toFixed(1)}° below horizon` : null;
 
   return (
-    <div className="rounded-lg border border-border bg-background/85 backdrop-blur-md px-3 py-2 text-xs text-foreground shadow-lg min-w-[220px]">
+    <div className="rounded-lg border border-border bg-background/85 backdrop-blur-md px-3 py-2 text-xs text-foreground shadow-lg min-w-55">
       <div className="flex items-baseline gap-2 mb-1.5">
         <span className="text-sm font-semibold capitalize">{info.body}</span>
         {isMoon ? (
@@ -120,7 +123,7 @@ function BodyTooltip({ info }: { info: BodyInfo }) {
   );
 }
 
-function BodyMarker({ info }: { info: BodyInfo }) {
+function BodyMarker({ info }: Readonly<{ info: BodyInfo }>) {
   // Always render the marker as long as the body has a sensible position.
   // The shader's halo extends well beyond the body's "core" radius, so a
   // small hit-area would frequently miss the visible glow. We keep the hit
@@ -178,6 +181,17 @@ export function HeroSky() {
   const hostRef = useRef<HTMLDivElement | null>(null);
   const [bodies, setBodies] = useState<SkyBodies>({ sun: null, moon: null });
 
+  // Resolved theme: 'light' | 'dark' (resolves 'system' via OS preference).
+  // Fall back to 'dark' until next-themes mounts to avoid an SSR/client flicker.
+  const { resolvedTheme } = useTheme();
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
+  const themeMode: "light" | "dark" =
+    mounted && resolvedTheme === "light" ? "light" : "dark";
+
   const handlePaletteChange = (illumination: number, tintHsl: string) => {
     const host = hostRef.current;
     if (!host) return;
@@ -187,22 +201,34 @@ export function HeroSky() {
 
   return (
     <>
-      {/* Visual backdrop layer — sits behind everything (-z-20). */}
+      {/* Visual backdrop layer — sits behind everything (-z-20).
+          Note: we deliberately do NOT modulate opacity by --sky-light here.
+          The canvas already handles its own sky brightness internally; if we
+          dimmed the wrapper at night the entire scene would wash out, and if
+          we brightened it at noon the canvas would visually compete with the
+          hero text. A fixed, modest backdrop opacity keeps the gradient
+          subtle while the canvas does the heavy lifting. */}
       <div
         ref={hostRef}
         className="absolute inset-0 -z-20 overflow-hidden pointer-events-none"
         style={
           {
             backgroundImage:
-              "radial-gradient(ellipse 80% 50% at 50% -20%, color-mix(in oklch, var(--sky-tint, transparent) 45%, transparent), transparent 70%)",
-            opacity: "calc(0.35 + 0.45 * var(--sky-light, 0))",
+              "radial-gradient(ellipse 80% 50% at 50% -20%, color-mix(in oklch, var(--sky-tint, transparent) 35%, transparent), transparent 70%)",
           } as React.CSSProperties
         }
       >
         {enabled ? (
-          <div className="absolute inset-0 opacity-80 dark:opacity-95">
+          <div
+            className={
+              themeMode === "light"
+                ? "absolute inset-0 opacity-55"
+                : "absolute inset-0 opacity-95"
+            }
+          >
             <SkyCanvas
               reducedMotion={reducedMotion}
+              themeMode={themeMode}
               onPaletteChange={handlePaletteChange}
               onBodiesChange={setBodies}
             />

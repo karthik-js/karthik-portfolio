@@ -127,8 +127,8 @@ function offsetMinutesFromTimeZone(tz: string, when: Date): number {
     const m = /GMT([+-])(\d{1,2})(?::(\d{2}))?/.exec(offsetPart);
     if (!m) return 0;
     const sign = m[1] === "+" ? 1 : -1;
-    const hours = parseInt(m[2], 10);
-    const mins = m[3] ? parseInt(m[3], 10) : 0;
+    const hours = Number.parseInt(m[2], 10);
+    const mins = m[3] ? Number.parseInt(m[3], 10) : 0;
     return sign * (hours * 60 + mins);
   } catch {
     return 0;

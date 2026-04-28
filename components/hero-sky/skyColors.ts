@@ -40,6 +40,7 @@ export function paletteForSunAltitude(
   sunAltRad: number,
   moonFraction: number,
   moonAboveHorizon: boolean,
+  themeMode: "light" | "dark" = "dark",
 ): SkyPalette {
   const altDeg = (sunAltRad * 180) / Math.PI;
 
@@ -64,6 +65,25 @@ export function paletteForSunAltitude(
   } else {
     top = DAY_TOP;
     bottom = DAY_BOTTOM;
+  }
+
+  // Theme adaptation. The natural palette above is tuned for a dark UI.
+  // - In LIGHT mode we lift very-dark night tones toward soft blue-grey so
+  //   the sky doesn't look like a black hole punched into a bright page.
+  // - In DARK mode we deepen mid-day brightness so a vivid blue daytime sky
+  //   doesn't blow out the surrounding dark UI.
+  const dayWeight = smoothstep(-6, 12, altDeg); // 0 night → 1 mid-day
+  const nightWeight = 1 - smoothstep(-12, -6, altDeg); // 1 deep night → 0 by civil-dusk
+  if (themeMode === "light") {
+    // Lift night sky toward soft slate when the page background is bright.
+    const lightLift: [number, number, number] = [0.55, 0.62, 0.75];
+    top = lerp3(top, lightLift, nightWeight * 0.55);
+    bottom = lerp3(bottom, lightLift, nightWeight * 0.5);
+  } else {
+    // Tone down daytime brightness when the page background is dark.
+    const darkPress: [number, number, number] = [0.18, 0.28, 0.45];
+    top = lerp3(top, darkPress, dayWeight * 0.5);
+    bottom = lerp3(bottom, darkPress, dayWeight * 0.4);
   }
 
   const sunIllum = Math.max(0, Math.min(1, (altDeg + 6) / 56));
@@ -93,6 +113,11 @@ export function paletteForSunAltitude(
     hue = 230;
     sat = 30;
     light = 10;
+  }
+  // The page-glow tint nudges lighter under light theme so it doesn't print
+  // a dark blob over a bright background.
+  if (themeMode === "light") {
+    light = Math.max(light, 50);
   }
   const tintHsl = `hsl(${hue.toFixed(0)} ${sat.toFixed(0)}% ${light.toFixed(0)}%)`;
 
