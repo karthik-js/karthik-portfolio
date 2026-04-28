@@ -90,33 +90,33 @@ function BodyTooltip({ info }: Readonly<{ info: BodyInfo }>) {
       <div className="flex items-baseline gap-2 mb-1.5">
         <span className="text-sm font-semibold capitalize">{info.body}</span>
         {isMoon ? (
-          <span className="text-muted text-[11px]">{phaseName}</span>
+          <span className="text-muted-foreground text-[11px]">{phaseName}</span>
         ) : null}
       </div>
       <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-0.5 text-[11px] tabular-nums">
-        <dt className="text-muted">Altitude</dt>
+        <dt className="text-muted-foreground">Altitude</dt>
         <dd>
           {altDeg.toFixed(1)}°
           {horizonNote ? (
-            <span className="text-muted ml-1">({horizonNote})</span>
+            <span className="text-muted-foreground ml-1">({horizonNote})</span>
           ) : null}
         </dd>
-        <dt className="text-muted">Azimuth</dt>
+        <dt className="text-muted-foreground">Azimuth</dt>
         <dd>
           {compassDeg.toFixed(0)}° {compass}
         </dd>
         {isMoon ? (
           <>
-            <dt className="text-muted">Illumination</dt>
+            <dt className="text-muted-foreground">Illumination</dt>
             <dd>{illumPct}%</dd>
           </>
         ) : null}
-        <dt className="text-muted">Local time</dt>
+        <dt className="text-muted-foreground">Local time</dt>
         <dd>{localTime}</dd>
-        <dt className="text-muted">From</dt>
+        <dt className="text-muted-foreground">From</dt>
         <dd>
           {info.location.lat.toFixed(2)}°, {info.location.lon.toFixed(2)}°
-          <span className="text-muted ml-1">({info.location.source})</span>
+          <span className="text-muted-foreground ml-1">({info.location.source})</span>
         </dd>
       </dl>
     </div>
