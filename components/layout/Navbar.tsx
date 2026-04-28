@@ -98,7 +98,7 @@ export function Navbar() {
           ) : (
             <Link
               href="/"
-              className="inline-flex items-center gap-2 text-sm font-medium text-muted hover:text-foreground transition-colors cursor-pointer"
+              className="inline-flex items-center gap-2 text-sm font-medium text-foreground/70 hover:text-foreground transition-colors cursor-pointer"
             >
               <ArrowLeft size={16} />
               Back to Home
@@ -119,7 +119,7 @@ export function Navbar() {
                       "px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 cursor-pointer",
                       activeSection === link.href.slice(1)
                         ? "text-foreground bg-card"
-                        : "text-muted hover:text-foreground",
+                        : "text-foreground/70 hover:text-foreground",
                     )}
                   >
                     {link.label}
@@ -131,15 +131,15 @@ export function Navbar() {
 
           {/* Right side */}
           <div className="flex items-center gap-3">
-            <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-emerald-500/30 bg-emerald-500/10">
-              <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-xs font-medium text-emerald-400">
+            <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-status/30 bg-background/60 backdrop-blur-sm">
+              <div className="w-1.5 h-1.5 rounded-full bg-status animate-pulse" />
+              <span className="text-xs font-medium text-status">
                 Open to Work
               </span>
             </div>
             <ThemeToggle />
             <button
-              className="md:hidden flex items-center justify-center w-9 h-9 rounded-lg border border-border text-muted hover:text-foreground transition-colors"
+              className="md:hidden flex items-center justify-center w-9 h-9 rounded-lg border border-border text-foreground/70 hover:text-foreground transition-colors"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileOpen}
@@ -221,8 +221,8 @@ export function Navbar() {
               </nav>
               <div className="mt-auto p-4 border-t border-border">
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="text-sm text-emerald-400 font-medium">
+                  <div className="w-2 h-2 rounded-full bg-status animate-pulse" />
+                  <span className="text-sm text-status font-medium">
                     Open to Work
                   </span>
                 </div>

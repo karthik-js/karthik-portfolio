@@ -8,6 +8,7 @@
   --color-muted: #71717a;
   --color-card: #111111;
   --color-border: #27272a;
+  --color-status: #6ee7b7;
 
   --font-sans: var(--font-geist-sans), system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), monospace;
@@ -25,6 +26,7 @@
   --color-card: #f4f4f5;
   --color-border: #e4e4e7;
   --color-muted: #71717a;
+  --color-status: #059669;
   --grid-line: rgba(0, 0, 0, 0.04);
 }
 

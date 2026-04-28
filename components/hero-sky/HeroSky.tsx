@@ -10,7 +10,7 @@ import {
   moonPhaseName,
   radToDeg,
 } from "./metrics";
-import type { BodyInfo, SkyBodies } from "./SkyCanvas";
+import type { BodyInfo, SkyBodies, SkyStats } from "./SkyCanvas";
 
 const SkyCanvas = dynamic(
   () => import("./SkyCanvas").then((m) => m.SkyCanvas),
@@ -160,7 +160,23 @@ function BodyMarker({ info }: Readonly<{ info: BodyInfo }>) {
   );
 }
 
-export function HeroSky() {
+function StatsHud({ stats }: Readonly<{ stats: SkyStats }>) {
+  const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  return (
+    <div className="absolute bottom-6 left-4 z-30 pointer-events-none font-mono text-[10px] leading-relaxed text-foreground/50 select-none">
+      <span className="tabular-nums">{stats.fps}</span> FPS ·{" "}
+      {stats.resolution} · {tz}
+      <br />
+      {stats.gpu}
+    </div>
+  );
+}
+
+export function HeroSky({
+  onIlluminationChange,
+}: Readonly<{
+  onIlluminationChange?: (illumination: number) => void;
+}>) {
   const reducedMotion = useSyncExternalStore(
     subscribeReducedMotion,
     getReducedMotion,
@@ -180,6 +196,7 @@ export function HeroSky() {
 
   const hostRef = useRef<HTMLDivElement | null>(null);
   const [bodies, setBodies] = useState<SkyBodies>({ sun: null, moon: null });
+  const [stats, setStats] = useState<SkyStats | null>(null);
 
   // Resolved theme: 'light' | 'dark' (resolves 'system' via OS preference).
   // Fall back to 'dark' until next-themes mounts to avoid an SSR/client flicker.
@@ -195,8 +212,8 @@ export function HeroSky() {
   const handlePaletteChange = (illumination: number, tintHsl: string) => {
     const host = hostRef.current;
     if (!host) return;
-    host.style.setProperty("--sky-light", illumination.toFixed(3));
     host.style.setProperty("--sky-tint", tintHsl);
+    onIlluminationChange?.(illumination);
   };
 
   return (
@@ -231,6 +248,7 @@ export function HeroSky() {
               themeMode={themeMode}
               onPaletteChange={handlePaletteChange}
               onBodiesChange={setBodies}
+              onStatsChange={setStats}
             />
           </div>
         ) : null}
@@ -245,6 +263,7 @@ export function HeroSky() {
           {bodies.moon ? <BodyMarker info={bodies.moon} /> : null}
         </div>
       ) : null}
+      {enabled && stats ? <StatsHud stats={stats} /> : null}
     </>
   );
 }
