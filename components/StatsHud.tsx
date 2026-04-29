@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 
 type StaticStats = {
   resolution: string;
@@ -32,8 +32,9 @@ function readGpu(): string {
   }
 }
 
+let cachedStaticStats: StaticStats | null = null;
 function readStaticStats(): StaticStats {
-  return {
+  cachedStaticStats ??= {
     resolution: `${window.screen.width}×${window.screen.height}`,
     dpr: window.devicePixelRatio,
     tz: Intl.DateTimeFormat().resolvedOptions().timeZone,
@@ -42,19 +43,53 @@ function readStaticStats(): StaticStats {
     ram: (navigator as any).deviceMemory ?? null,
     gpu: readGpu(),
   };
+  return cachedStaticStats;
 }
 
+let cachedConnection: ConnectionStats = {
+  netType: null,
+  downlink: null,
+  rtt: null,
+};
 function readConnection(): ConnectionStats {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const conn = (navigator as any).connection ?? null;
-  return {
+  const next: ConnectionStats = {
     netType: conn?.effectiveType ?? null,
     downlink: conn?.downlink ?? null,
     rtt: conn?.rtt ?? null,
   };
+  if (
+    next.netType === cachedConnection.netType &&
+    next.downlink === cachedConnection.downlink &&
+    next.rtt === cachedConnection.rtt
+  ) {
+    return cachedConnection;
+  }
+  cachedConnection = next;
+  return cachedConnection;
 }
 
-// Isolated child — only this re-renders on every fps tick.
+// ── useSyncExternalStore helpers ─────────────────────────────────────────────
+
+function subscribeNoop() {
+  return () => {};
+}
+
+function subscribeConnection(cb: () => void) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const conn = (navigator as any).connection ?? null;
+  conn?.addEventListener("change", cb);
+  return () => conn?.removeEventListener("change", cb);
+}
+
+const serverConnectionStats: ConnectionStats = {
+  netType: null,
+  downlink: null,
+  rtt: null,
+};
+
+// ── Isolated child — only this re-renders on every fps tick ──────────────────
 function FpsDisplay() {
   const [fps, setFps] = useState(0);
   const frameCountRef = useRef(0);
@@ -81,21 +116,16 @@ function FpsDisplay() {
 }
 
 export function StatsHud() {
-  const [staticStats] = useState<StaticStats | null>(() => readStaticStats());
-  const [conn, setConn] = useState<ConnectionStats>(() => readConnection());
-
-  useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const connection = (navigator as any).connection ?? null;
-
-    // Subscribe to the native change event where available, and poll every 5 s
-    // as a fallback — the change event is unreliable on stable connections.
-    const update = () => setConn(readConnection());
-    connection?.addEventListener("change", update);
-    return () => {
-      connection?.removeEventListener("change", update);
-    };
-  }, []);
+  const staticStats = useSyncExternalStore(
+    subscribeNoop,
+    readStaticStats,
+    () => null,
+  );
+  const conn = useSyncExternalStore(
+    subscribeConnection,
+    readConnection,
+    () => serverConnectionStats,
+  );
 
   if (!staticStats) return null;
 
