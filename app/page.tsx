@@ -10,6 +10,12 @@ import { Skills } from "@/components/sections/Skills";
 import { StatsHud } from "@/components/StatsHud";
 import { DotBackground } from "@/components/ui/dot-background";
 
+export const metadata = {
+  title: "Karthik Talam — Lead Frontend Engineer",
+  description:
+    "8+ years building high-performance web platforms. Expert in Next.js App Router, enterprise auth, and AI-augmented engineering workflows.",
+};
+
 export default function Home() {
   return (
     <>

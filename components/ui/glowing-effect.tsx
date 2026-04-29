@@ -30,21 +30,22 @@ const GlowingEffect = memo(
     disabled = true,
   }: GlowingEffectProps) => {
     const containerRef = useRef<HTMLDivElement>(null);
-    const lastPosition = useRef({ x: 0, y: 0 });
-    const animationFrameRef = useRef<number>(0);
+  const glowRef = useRef<HTMLDivElement>(null);
+  const lastPosition = useRef({ x: 0, y: 0 });
+  const animationFrameRef = useRef<number>(0);
 
-    const handleMove = useCallback(
-      (e?: MouseEvent | { x: number; y: number }) => {
-        if (!containerRef.current) return;
+  const handleMove = useCallback(
+    (e?: MouseEvent | { x: number; y: number }) => {
+      if (!containerRef.current || !glowRef.current) return;
 
-        if (animationFrameRef.current) {
-          cancelAnimationFrame(animationFrameRef.current);
-        }
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
 
-        animationFrameRef.current = requestAnimationFrame(() => {
-          const element = containerRef.current;
-          if (!element) return;
-
+      animationFrameRef.current = requestAnimationFrame(() => {
+        const element = containerRef.current;
+        const target = glowRef.current;
+        if (!element || !target) return;
           const { left, top, width, height } = element.getBoundingClientRect();
           const mouseX = e?.x ?? lastPosition.current.x;
           const mouseY = e?.y ?? lastPosition.current.y;
@@ -61,7 +62,7 @@ const GlowingEffect = memo(
           const inactiveRadius = 0.5 * Math.min(width, height) * inactiveZone;
 
           if (distanceFromCenter < inactiveRadius) {
-            element.style.setProperty("--active", "0");
+            target.style.opacity = "0";
             return;
           }
 
@@ -71,12 +72,12 @@ const GlowingEffect = memo(
             mouseY > top - proximity &&
             mouseY < top + height + proximity;
 
-          element.style.setProperty("--active", isActive ? "1" : "0");
+          target.style.opacity = isActive ? "1" : "0";
 
           if (!isActive) return;
 
           const currentAngle =
-            parseFloat(element.style.getPropertyValue("--start")) || 0;
+            parseFloat(target.style.getPropertyValue("--start")) || 0;
           const targetAngle =
             (180 * Math.atan2(mouseY - center[1], mouseX - center[0])) /
               Math.PI +
@@ -85,13 +86,14 @@ const GlowingEffect = memo(
           const angleDiff = ((targetAngle - currentAngle + 180) % 360) - 180;
           const newAngle = currentAngle + angleDiff;
 
-          animate(currentAngle, newAngle, {
-            duration: movementDuration,
-            ease: [0.16, 1, 0.3, 1],
-            onUpdate: (value) => {
-              element.style.setProperty("--start", String(value));
+          target.animate(
+            [{ "--start": `${currentAngle}` }, { "--start": `${newAngle}` }],
+            {
+              duration: movementDuration * 1000,
+              easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+              fill: "forwards",
             },
-          });
+          );
         });
       },
       [inactiveZone, proximity, movementDuration],
@@ -133,8 +135,6 @@ const GlowingEffect = memo(
             {
               "--blur": `${blur}px`,
               "--spread": spread,
-              "--start": "0",
-              "--active": "0",
               "--glowingeffect-border-width": `${borderWidth}px`,
               "--repeating-conic-gradient-times": "5",
               "--gradient":
@@ -167,13 +167,18 @@ const GlowingEffect = memo(
           )}
         >
           <div
+            ref={glowRef}
+            style={{
+              "--start": "0",
+              opacity: 0,
+            } as React.CSSProperties}
             className={cn(
               "glow",
               "rounded-[inherit]",
+              "transition-opacity duration-300",
               'after:content-[""] after:rounded-[inherit] after:absolute after:-inset-(--glowingeffect-border-width)',
               "after:[border:var(--glowingeffect-border-width)_solid_transparent]",
               "after:[background:var(--gradient)] after:bg-fixed",
-              "after:opacity-(--active) after:transition-opacity after:duration-300",
               "after:[mask-clip:padding-box,border-box]",
               "after:mask-intersect",
               "after:mask-[linear-gradient(#0000,#0000),conic-gradient(from_calc((var(--start)-var(--spread))*1deg),#00000000_0deg,#fff,#00000000_calc(var(--spread)*2deg))]",

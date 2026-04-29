@@ -2,6 +2,18 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+@property --active {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --start {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 :root {

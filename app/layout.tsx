@@ -1,5 +1,6 @@
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import Script from "next/script";
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -92,28 +93,26 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@graph": [
-                {
-                  "@type": "Person",
-                  "@id": "https://karthik.run/#person",
-                  name: "Karthik Talam",
-                  givenName: "Karthik",
-                  familyName: "Talam",
-                  jobTitle: "Lead Frontend Engineer",
-                  url: "https://karthik.run",
-                  email: "mailto:karthiktalam8@gmail.com",
-                  image: {
-                    "@type": "ImageObject",
-                    url: "https://karthik.run/karthik-profile.jpg",
-                    width: 400,
-                    height: 400,
-                  },
-                  sameAs: [
+        <Script id="root-structured-data" type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "Person",
+                "@id": "https://karthik.run/#person",
+                name: "Karthik Talam",
+                givenName: "Karthik",
+                familyName: "Talam",
+                jobTitle: "Lead Frontend Engineer",
+                url: "https://karthik.run",
+                email: "mailto:karthiktalam8@gmail.com",
+                image: {
+                  "@type": "ImageObject",
+                  url: "https://karthik.run/karthik-profile.jpg",
+                  width: 400,
+                  height: 400,
+                },
+                sameAs: [
                     "https://github.com/karthik-js",
                     "https://www.linkedin.com/in/karthik-talam/",
                     "https://x.com/karthiktalam",
@@ -177,10 +176,9 @@ export default function RootLayout({
                     "Fractional Lead Engineer",
                   ],
                 },
-              ],
-            }),
-          }}
-        />
+              ]
+            })}
+        </Script>
         <ThemeProvider>{children}</ThemeProvider>
         <SpeedInsights />
       </body>

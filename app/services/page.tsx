@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { ServicesContent } from "@/components/sections/ServicesContent";
+import Script from "next/script";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -151,10 +152,9 @@ const servicesJsonLd = {
 export default function ServicesPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesJsonLd) }}
-      />
+      <Script id="services-structured-data" type="application/ld+json">
+        {JSON.stringify(servicesJsonLd)}
+      </Script>
       <Navbar />
       <ServicesContent />
     </>
