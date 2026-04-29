@@ -1,7 +1,8 @@
 "use client";
 
 import { Scales } from "@/components/ui/scales";
-import { motion, type Variants } from "framer-motion";
+import * as m from "motion/react-m";
+import type { Variants } from "motion/react";
 import Image from "next/image";
 
 const fadeUp: Variants = {
@@ -20,7 +21,7 @@ export function About() {
   return (
     <section id="about" className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
-        <motion.div
+        <m.div
           className="grid lg:grid-cols-2 gap-16 items-start"
           initial="hidden"
           whileInView="show"
@@ -29,21 +30,21 @@ export function About() {
         >
           {/* Left: Text */}
           <div>
-            <motion.p
+            <m.p
               variants={fadeUp}
               className="text-sm font-medium text-primary uppercase tracking-widest mb-4"
             >
               About
-            </motion.p>
-            <motion.h2
+            </m.p>
+            <m.h2
               variants={fadeUp}
               className="text-3xl sm:text-4xl font-bold text-foreground mb-8 leading-tight"
             >
               I make teams ship
               <br />
               <span className="text-primary">better — and faster.</span>
-            </motion.h2>
-            <motion.div
+            </m.h2>
+            <m.div
               variants={fadeUp}
               className="space-y-5 text-muted-foreground leading-relaxed"
             >
@@ -65,9 +66,9 @@ export function About() {
                 improvement, scaled test coverage to 4,500+ tests, and pioneered
                 an agentic AI workflow that cut ticket closure time by ~35%.
               </p>
-            </motion.div>
+            </m.div>
 
-            <motion.div variants={fadeUp} className="mt-8 flex flex-wrap gap-3">
+            <m.div variants={fadeUp} className="mt-8 flex flex-wrap gap-3">
               {[
                 "Next.js 15",
                 "React 19",
@@ -83,13 +84,13 @@ export function About() {
                   {tech}
                 </span>
               ))}
-            </motion.div>
+            </m.div>
           </div>
 
           {/* Right: Photo + Stats */}
           <div className="flex flex-col gap-4">
             {/* Photo with Scales border strips */}
-            <motion.div variants={fadeUp} className="flex justify-center">
+            <m.div variants={fadeUp} className="flex justify-center">
               <div className="relative h-80 w-64 rounded-lg bg-card">
                 {/* Left strip */}
                 <div className="absolute inset-y-[-30%] -left-10 h-[160%] w-8 mask-t-from-90% mask-b-from-90%">
@@ -121,15 +122,15 @@ export function About() {
                   />
                 </div>
               </div>
-            </motion.div>
+            </m.div>
 
             {/* Stats — 4 columns under the photo */}
-            <motion.div
+            <m.div
               className="grid grid-cols-4 gap-3 mt-20"
               variants={{ show: { transition: { staggerChildren: 0.1 } } }}
             >
               {stats.map(({ value, label }) => (
-                <motion.div
+                <m.div
                   key={label}
                   variants={fadeUp}
                   className="p-4 rounded-2xl border border-border bg-card group hover:border-primary/50 transition-colors duration-300 flex flex-col items-center text-center"
@@ -140,12 +141,12 @@ export function About() {
                   <p className="mt-1 text-xs text-muted-foreground leading-tight">
                     {label}
                   </p>
-                </motion.div>
+                </m.div>
               ))}
-            </motion.div>
+            </m.div>
 
             {/* Currently at */}
-            <motion.div
+            <m.div
               variants={fadeUp}
               className="p-5 rounded-2xl border border-border bg-card"
             >
@@ -172,10 +173,10 @@ export function About() {
                   </p>
                 </div>
               </div>
-            </motion.div>
+            </m.div>
 
             {/* Open to work */}
-            <motion.div
+            <m.div
               variants={fadeUp}
               className="p-4 rounded-2xl border border-emerald-500/20 bg-emerald-500/5 flex items-center gap-3"
             >
@@ -183,9 +184,9 @@ export function About() {
               <p className="text-sm text-emerald-400 font-medium">
                 Open to new opportunities
               </p>
-            </motion.div>
+            </m.div>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

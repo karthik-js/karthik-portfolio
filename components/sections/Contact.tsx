@@ -1,7 +1,8 @@
 "use client";
 
 import { GitHubIcon, LinkedInIcon } from "@/components/ui/BrandIcons";
-import { motion, type Variants } from "framer-motion";
+import * as m from "motion/react-m";
+import type { Variants } from "motion/react";
 import { ArrowUpRight, Mail } from "lucide-react";
 
 const fadeUp: Variants = {
@@ -37,41 +38,41 @@ export function Contact() {
   return (
     <section id="contact" className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto text-left lg:text-center">
-        <motion.div
+        <m.div
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
           variants={{ show: { transition: { staggerChildren: 0.12 } } }}
         >
-          <motion.p
+          <m.p
             variants={fadeUp}
             className="text-sm font-medium text-primary uppercase tracking-widest mb-4"
           >
             Contact
-          </motion.p>
-          <motion.h2
+          </m.p>
+          <m.h2
             variants={fadeUp}
             className="text-3xl sm:text-5xl font-bold text-foreground mb-6 leading-tight"
           >
             Working on something
             <br />
             <span className="text-primary">ambitious?</span>
-          </motion.h2>
-          <motion.p
+          </m.h2>
+          <m.p
             variants={fadeUp}
             className="text-muted-foreground text-lg mb-16 max-w-xl lg:mx-auto leading-relaxed"
           >
             I&apos;m selective about what I take on — but if you&apos;re
             building something hard, that&apos;s exactly where I do my best
             work.
-          </motion.p>
+          </m.p>
 
-          <motion.div
+          <m.div
             className="grid sm:grid-cols-3 gap-4 mb-16"
             variants={{ show: { transition: { staggerChildren: 0.1 } } }}
           >
             {contacts.map(({ label, value, href, icon: Icon, description }) => (
-              <motion.a
+              <m.a
                 key={label}
                 variants={fadeUp}
                 href={href}
@@ -99,14 +100,14 @@ export function Contact() {
                 <p className="text-xs text-primary font-mono truncate">
                   {value}
                 </p>
-              </motion.a>
+              </m.a>
             ))}
-          </motion.div>
+          </m.div>
 
-          <motion.p variants={fadeUp} className="text-sm text-muted-foreground">
+          <m.p variants={fadeUp} className="text-sm text-muted-foreground">
             Based in India · Available for remote work worldwide
-          </motion.p>
-        </motion.div>
+          </m.p>
+        </m.div>
       </div>
     </section>
   );

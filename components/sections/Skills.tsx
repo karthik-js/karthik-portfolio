@@ -2,7 +2,8 @@
 
 import { GlowingEffect } from "@/components/ui/glowing-effect";
 import { skillCategories } from "@/data/skills";
-import { motion, type Variants } from "framer-motion";
+import * as m from "motion/react-m";
+import type { Variants } from "motion/react";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
@@ -13,37 +14,37 @@ export function Skills() {
   return (
     <section id="skills" className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
-        <motion.div
+        <m.div
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
           variants={{ show: { transition: { staggerChildren: 0.1 } } }}
         >
-          <motion.p
+          <m.p
             variants={fadeUp}
             className="text-sm font-medium text-primary uppercase tracking-widest mb-4"
           >
             Skills
-          </motion.p>
-          <motion.h2
+          </m.p>
+          <m.h2
             variants={fadeUp}
             className="text-3xl sm:text-4xl font-bold text-foreground mb-4 leading-tight"
           >
             How I Build
-          </motion.h2>
-          <motion.p
+          </m.h2>
+          <m.p
             variants={fadeUp}
             className="text-muted-foreground max-w-xl mb-16"
           >
             Tools and technologies I reach for when building products.
-          </motion.p>
+          </m.p>
 
-          <motion.div
+          <m.div
             className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
             variants={{ show: { transition: { staggerChildren: 0.08 } } }}
           >
             {skillCategories.map((category) => (
-              <motion.div
+              <m.div
                 key={category.label}
                 variants={fadeUp}
                 className="relative p-6 rounded-2xl border border-border dark:border-transparent bg-card transition-colors duration-300"
@@ -62,10 +63,10 @@ export function Skills() {
                     </span>
                   ))}
                 </div>
-              </motion.div>
+              </m.div>
             ))}
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
       </div>
     </section>
   );

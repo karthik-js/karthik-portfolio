@@ -3,7 +3,7 @@
 import { HeroSky } from "@/components/hero-sky/HeroSky";
 import { GitHubIcon, LinkedInIcon } from "@/components/ui/BrandIcons";
 import { Button } from "@/components/ui/Button";
-import { motion } from "framer-motion";
+import * as m from "motion/react-m";
 import { ArrowDown, Mail } from "lucide-react";
 import { useCallback, useRef } from "react";
 
@@ -16,6 +16,25 @@ const stagger = {
   hidden: {},
   show: { transition: { staggerChildren: 0.12 } },
 };
+
+// Hoist static background elements outside component to prevent re-rendering
+const HeroBackground = () => (
+  <>
+    {/* Grid background */}
+    <div
+      className="absolute inset-0 -z-10 opacity-100"
+      style={{
+        backgroundImage: `
+          linear-gradient(var(--grid-line) 1px, transparent 1px),
+          linear-gradient(to right, var(--grid-line) 1px, transparent 1px)
+        `,
+        backgroundSize: "60px 60px",
+      }}
+    />
+    {/* Radial gradient overlay */}
+    <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,var(--primary)/12%,transparent)]" />
+  </>
+);
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -37,65 +56,52 @@ export function Hero() {
     >
       {/* WebGL celestial backdrop (sun/moon based on visitor's local sky) */}
       <HeroSky onIlluminationChange={handleIlluminationChange} />
+      <HeroBackground />
 
-      {/* Grid background */}
-      <div
-        className="absolute inset-0 -z-10 opacity-100"
-        style={{
-          backgroundImage: `
-            linear-gradient(var(--grid-line) 1px, transparent 1px),
-            linear-gradient(to right, var(--grid-line) 1px, transparent 1px)
-          `,
-          backgroundSize: "60px 60px",
-        }}
-      />
-      {/* Radial gradient overlay */}
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,var(--primary)/12%,transparent)]" />
-
-      <motion.div
+      <m.div
         className="relative max-w-4xl w-full mx-auto text-left lg:text-center"
         variants={stagger}
         initial="hidden"
         animate="show"
       >
         {/* Eyebrow */}
-        <motion.div variants={fadeUp} className="mb-6">
+        <m.div variants={fadeUp} className="mb-6">
           <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium border border-primary/30 bg-background/75 backdrop-blur-sm text-primary">
             <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
             Lead Frontend Engineer · Open to New Roles
           </span>
-        </motion.div>
+        </m.div>
 
         {/* Name */}
-        <motion.h1
+        <m.h1
           variants={fadeUp}
           className="text-6xl sm:text-7xl md:text-8xl font-bold tracking-tight text-foreground mb-4 leading-none"
         >
           Karthik
           <br />
           <span className="text-primary">Talam</span>
-        </motion.h1>
+        </m.h1>
 
         {/* Specialization */}
-        <motion.p
+        <m.p
           variants={fadeUp}
           className="text-base sm:text-lg font-medium text-foreground/60 uppercase tracking-widest mb-6"
         >
           Next.js Architect · Frontend Platform · Team Lead
-        </motion.p>
+        </m.p>
 
         {/* One-liner */}
-        <motion.p
+        <m.p
           variants={fadeUp}
           className="text-lg sm:text-xl text-foreground/70 max-w-2xl lg:mx-auto mb-10 leading-relaxed"
         >
           I build high-performance frontend platforms and lead the teams that
           ship them — faster pages, tighter pipelines, and engineering cultures
           that scale.
-        </motion.p>
+        </m.p>
 
         {/* CTAs */}
-        <motion.div
+        <m.div
           variants={fadeUp}
           className="flex flex-col sm:flex-row items-start lg:items-center justify-start lg:justify-center gap-4 mb-16"
         >
@@ -140,10 +146,10 @@ export function Hero() {
             </svg>
             Resume
           </a>
-        </motion.div>
+        </m.div>
 
         {/* Social links */}
-        <motion.div
+        <m.div
           variants={fadeUp}
           className="flex items-center justify-start lg:justify-center gap-4"
         >
@@ -177,11 +183,11 @@ export function Hero() {
               <Icon size={18} />
             </a>
           ))}
-        </motion.div>
-      </motion.div>
+        </m.div>
+      </m.div>
 
       {/* Scroll indicator */}
-      <motion.button
+      <m.button
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2 }}
@@ -192,16 +198,16 @@ export function Hero() {
         <span className="text-xs font-medium tracking-widest uppercase">
           Scroll
         </span>
-        <motion.div
+        <m.div
           animate={{ y: [0, 6, 0] }}
           transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
         >
           <ArrowDown size={16} />
-        </motion.div>
-      </motion.button>
+        </m.div>
+      </m.button>
 
       {/* Sky hint — explains the live sky concept */}
-      <motion.div
+      <m.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.8 }}
@@ -209,7 +215,7 @@ export function Hero() {
       >
         <span className="w-1.5 h-1.5 rounded-full bg-primary/60 animate-pulse" />
         Live sky · based on your location · hover ☀︎
-      </motion.div>
+      </m.div>
     </section>
   );
 }

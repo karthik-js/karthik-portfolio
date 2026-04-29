@@ -3,6 +3,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { LazyMotion, domAnimation } from "motion/react";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -179,7 +180,9 @@ export default function RootLayout({
               ]
             })}
         </Script>
-        <ThemeProvider>{children}</ThemeProvider>
+        <LazyMotion features={domAnimation} strict>
+          <ThemeProvider>{children}</ThemeProvider>
+        </LazyMotion>
         <SpeedInsights />
       </body>
     </html>

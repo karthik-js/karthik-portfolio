@@ -1,14 +1,30 @@
 import { BackToTop } from "@/components/BackToTop";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
-import { About } from "@/components/sections/About";
-import { Contact } from "@/components/sections/Contact";
-import { Experience } from "@/components/sections/Experience";
 import { Hero } from "@/components/sections/Hero";
-import { Projects } from "@/components/sections/Projects";
-import { Skills } from "@/components/sections/Skills";
 import { StatsHud } from "@/components/StatsHud";
 import { DotBackground } from "@/components/ui/dot-background";
+import dynamic from "next/dynamic";
+
+const About = dynamic(() => import("@/components/sections/About").then(m => ({ default: m.About })), {
+  loading: () => <div className="h-96" />,
+});
+
+const Projects = dynamic(() => import("@/components/sections/Projects").then(m => ({ default: m.Projects })), {
+  loading: () => <div className="h-96" />,
+});
+
+const Experience = dynamic(() => import("@/components/sections/Experience").then(m => ({ default: m.Experience })), {
+  loading: () => <div className="h-96" />,
+});
+
+const Skills = dynamic(() => import("@/components/sections/Skills").then(m => ({ default: m.Skills })), {
+  loading: () => <div className="h-96" />,
+});
+
+const Contact = dynamic(() => import("@/components/sections/Contact").then(m => ({ default: m.Contact })), {
+  loading: () => <div className="h-96" />,
+});
 
 export const metadata = {
   title: "Karthik Talam — Lead Frontend Engineer",

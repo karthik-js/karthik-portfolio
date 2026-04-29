@@ -2,7 +2,8 @@
 
 import { experience } from "@/data/experience";
 import { Timeline } from "@/components/ui/timeline";
-import { motion, type Variants } from "framer-motion";
+import * as m from "motion/react-m";
+import type { Variants } from "motion/react";
 import { useState } from "react";
 
 const fadeUp: Variants = {
@@ -60,32 +61,32 @@ export function Experience() {
   return (
     <section id="experience" className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
-        <motion.div
+        <m.div
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
           variants={{ show: { transition: { staggerChildren: 0.1 } } }}
         >
-          <motion.p
+          <m.p
             variants={fadeUp}
             className="text-sm font-medium text-primary uppercase tracking-widest mb-4"
           >
             Experience
-          </motion.p>
-          <motion.h2
+          </m.p>
+          <m.h2
             variants={fadeUp}
             className="text-3xl sm:text-4xl font-bold text-foreground mb-4 leading-tight"
           >
             Career Journey
-          </motion.h2>
-          <motion.p
+          </m.h2>
+          <m.p
             variants={fadeUp}
             className="text-muted-foreground max-w-xl mb-16"
           >
             8+ years across startups and enterprises — shipping products that
             matter.
-          </motion.p>
-        </motion.div>
+          </m.p>
+        </m.div>
 
         <Timeline data={timelineData} />
 

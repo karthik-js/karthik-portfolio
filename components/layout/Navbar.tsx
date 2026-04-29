@@ -1,7 +1,8 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "motion/react";
+import * as m from "motion/react-m";
 import { ArrowLeft, Menu, X } from "lucide-react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
@@ -151,14 +152,14 @@ export function Navbar() {
       <AnimatePresence>
         {mobileOpen && (
           <>
-            <motion.div
+            <m.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm md:hidden"
               onClick={() => setMobileOpen(false)}
             />
-            <motion.div
+            <m.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
@@ -180,7 +181,7 @@ export function Navbar() {
               <nav className="flex flex-col p-4 gap-1">
                 {isHome ? (
                   navLinks.map((link, i) => (
-                    <motion.button
+                    <m.button
                       key={link.href}
                       initial={{ opacity: 0, x: 20 }}
                       animate={{ opacity: 1, x: 0 }}
@@ -199,10 +200,10 @@ export function Navbar() {
                       )}
                     >
                       {link.label}
-                    </motion.button>
+                    </m.button>
                   ))
                 ) : (
-                  <motion.div
+                  <m.div
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                   >
@@ -213,7 +214,7 @@ export function Navbar() {
                       <ArrowLeft size={16} />
                       Back to Home
                     </Link>
-                  </motion.div>
+                  </m.div>
                 )}
               </nav>
               <div className="mt-auto p-4 border-t border-border">
@@ -224,7 +225,7 @@ export function Navbar() {
                   </span>
                 </div>
               </div>
-            </motion.div>
+            </m.div>
           </>
         )}
       </AnimatePresence>

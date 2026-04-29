@@ -6,10 +6,10 @@ import { GlowingEffect } from "@/components/ui/glowing-effect";
 import { projects } from "@/data/projects";
 import {
   AnimatePresence,
-  motion,
   type Transition,
   type Variants,
-} from "framer-motion";
+} from "motion/react";
+import * as m from "motion/react-m";
 import { ExternalLink, Star } from "lucide-react";
 import { useState } from "react";
 
@@ -35,35 +35,35 @@ export function Projects() {
   return (
     <section id="projects" className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
-        <motion.div
+        <m.div
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
           variants={{ show: { transition: { staggerChildren: 0.1 } } }}
         >
-          <motion.p
+          <m.p
             variants={fadeUp}
             className="text-sm font-medium text-primary uppercase tracking-widest mb-4"
           >
             Work
-          </motion.p>
-          <motion.h2
+          </m.p>
+          <m.h2
             variants={fadeUp}
             className="text-3xl sm:text-4xl font-bold text-foreground mb-4 leading-tight"
           >
             Selected Work
-          </motion.h2>
-          <motion.p
+          </m.h2>
+          <m.p
             variants={fadeUp}
             className="text-muted-foreground max-w-xl mb-16"
           >
             Side projects with real users, real metrics, and real code.
-          </motion.p>
+          </m.p>
 
           <div className="grid sm:grid-cols-2 gap-6">
             <AnimatePresence mode="popLayout">
               {displayed.map((project) => (
-                <motion.article
+                <m.article
                   key={project.name}
                   {...cardAnim}
                   layout
@@ -123,12 +123,12 @@ export function Projects() {
                       <Badge key={tech}>{tech}</Badge>
                     ))}
                   </div>
-                </motion.article>
+                </m.article>
               ))}
             </AnimatePresence>
           </div>
 
-          <motion.div
+          <m.div
             variants={fadeUp}
             className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4"
           >
@@ -151,8 +151,8 @@ export function Projects() {
               <GitHubIcon size={16} />
               See more on GitHub
             </a>
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
       </div>
     </section>
   );

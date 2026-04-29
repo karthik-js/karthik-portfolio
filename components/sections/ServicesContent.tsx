@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import * as m from "motion/react-m";
+import type { Variants } from "motion/react";
 import {
   Bot,
   Check,
@@ -165,59 +166,59 @@ export function ServicesContent() {
       <section className="pt-20 pb-16 sm:pt-28 sm:pb-20 px-4 sm:px-6 lg:px-8 text-center relative overflow-hidden">
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,var(--primary)/10%,transparent)]" />
 
-        <motion.div
+        <m.div
           className="max-w-3xl mx-auto"
           variants={stagger}
           initial="hidden"
           animate="show"
         >
-          <motion.p
+          <m.p
             variants={fadeUp}
             className="uppercase tracking-widest text-primary text-sm font-medium mb-4"
           >
             Services
-          </motion.p>
-          <motion.h1
+          </m.p>
+          <m.h1
             variants={fadeUp}
             className="text-4xl sm:text-5xl font-bold tracking-tight text-foreground mb-6"
           >
             Work With Me
-          </motion.h1>
-          <motion.p
+          </m.h1>
+          <m.p
             variants={fadeUp}
             className="text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto"
           >
             Available for consulting, code reviews, and fractional technical
             leadership — remote-first, worldwide.
-          </motion.p>
-        </motion.div>
+          </m.p>
+        </m.div>
       </section>
 
       {/* ── What I Help With ───────────────────────────────────── */}
       <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-card">
-        <motion.div
+        <m.div
           className="max-w-6xl mx-auto"
           variants={stagger}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-80px" }}
         >
-          <motion.p
+          <m.p
             variants={fadeUp}
             className="uppercase tracking-widest text-primary text-sm font-medium text-center mb-4"
           >
             Expertise
-          </motion.p>
-          <motion.h2
+          </m.p>
+          <m.h2
             variants={fadeUp}
             className="text-3xl sm:text-4xl font-bold text-foreground text-center mb-12"
           >
             What I Help With
-          </motion.h2>
+          </m.h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {expertise.map(({ icon: Icon, title, description }) => (
-              <motion.div
+              <m.div
                 key={title}
                 variants={fadeUp}
                 className="rounded-2xl border border-border bg-card p-6 flex gap-4 hover:border-primary/50 transition-colors duration-300"
@@ -233,28 +234,28 @@ export function ServicesContent() {
                     {description}
                   </p>
                 </div>
-              </motion.div>
+              </m.div>
             ))}
           </div>
-        </motion.div>
+        </m.div>
       </section>
 
       {/* ── Trusted By ─────────────────────────────────────────── */}
       <section className="py-10 sm:py-12 px-4 sm:px-6 lg:px-8">
-        <motion.div
+        <m.div
           className="max-w-4xl mx-auto text-center"
           variants={stagger}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-80px" }}
         >
-          <motion.p
+          <m.p
             variants={fadeUp}
             className="text-xs uppercase tracking-widest text-muted-foreground font-medium mb-6"
           >
             Worked with teams at
-          </motion.p>
-          <motion.div
+          </m.p>
+          <m.div
             variants={fadeUp}
             className="flex flex-wrap items-center justify-center gap-3"
           >
@@ -266,8 +267,8 @@ export function ServicesContent() {
                 {name}
               </span>
             ))}
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
       </section>
 
       {/* ── Consulting Packages ────────────────────────────────── */}
@@ -275,29 +276,29 @@ export function ServicesContent() {
         id="packages"
         className="pt-10 pb-20 sm:pt-12 sm:pb-24 px-4 sm:px-6 lg:px-8"
       >
-        <motion.div
+        <m.div
           className="max-w-6xl mx-auto"
           variants={stagger}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-80px" }}
         >
-          <motion.p
+          <m.p
             variants={fadeUp}
             className="uppercase tracking-widest text-primary text-sm font-medium text-center mb-4"
           >
             Packages
-          </motion.p>
-          <motion.h2
+          </m.p>
+          <m.h2
             variants={fadeUp}
             className="text-3xl sm:text-4xl font-bold text-foreground text-center mb-12"
           >
             Engagement Options
-          </motion.h2>
+          </m.h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {packages.map((pkg) => (
-              <motion.div
+              <m.div
                 key={pkg.name}
                 variants={fadeUp}
                 className={`relative rounded-2xl border bg-card p-8 flex flex-col transition-colors duration-300 hover:border-primary/50 ${
@@ -359,37 +360,37 @@ export function ServicesContent() {
                 >
                   {pkg.cta}
                 </a>
-              </motion.div>
+              </m.div>
             ))}
           </div>
-        </motion.div>
+        </m.div>
       </section>
 
       {/* ── FAQ ────────────────────────────────────────────────── */}
       <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-card">
-        <motion.div
+        <m.div
           className="max-w-3xl mx-auto"
           variants={stagger}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-80px" }}
         >
-          <motion.p
+          <m.p
             variants={fadeUp}
             className="uppercase tracking-widest text-primary text-sm font-medium text-center mb-4"
           >
             FAQ
-          </motion.p>
-          <motion.h2
+          </m.p>
+          <m.h2
             variants={fadeUp}
             className="text-3xl sm:text-4xl font-bold text-foreground text-center mb-12"
           >
             Before You Reach Out
-          </motion.h2>
+          </m.h2>
 
           <div className="flex flex-col gap-6">
             {faqs.map(({ q, a }) => (
-              <motion.div
+              <m.div
                 key={q}
                 variants={fadeUp}
                 className="rounded-2xl border border-border bg-card p-6 hover:border-primary/50 transition-colors duration-300"
@@ -400,34 +401,34 @@ export function ServicesContent() {
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   {a}
                 </p>
-              </motion.div>
+              </m.div>
             ))}
           </div>
-        </motion.div>
+        </m.div>
       </section>
 
       {/* ── Final CTA ──────────────────────────────────────────── */}
       <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8">
-        <motion.div
+        <m.div
           className="max-w-3xl mx-auto text-center"
           variants={stagger}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-80px" }}
         >
-          <motion.h2
+          <m.h2
             variants={fadeUp}
             className="text-3xl sm:text-4xl font-bold text-foreground mb-4"
           >
             Ready to ship better software?
-          </motion.h2>
-          <motion.p
+          </m.h2>
+          <m.p
             variants={fadeUp}
             className="text-lg text-muted-foreground mb-10"
           >
             Let&apos;s talk about your project.
-          </motion.p>
-          <motion.div variants={fadeUp}>
+          </m.p>
+          <m.div variants={fadeUp}>
             <a
               href="mailto:karthiktalam8@gmail.com"
               className="inline-flex items-center gap-2 px-7 py-3.5 rounded-lg text-base font-medium bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/20 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
@@ -435,8 +436,8 @@ export function ServicesContent() {
               <Mail size={18} aria-hidden="true" />
               Get in Touch
             </a>
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
       </section>
     </main>
   );
