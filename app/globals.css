@@ -51,12 +51,24 @@
 html,
 html[data-scroll-behavior="smooth"] {
   scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
 }
 
 body {
   transition: background-color 0.3s ease, color 0.3s ease;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Snap each section to the top, offset by the fixed navbar height (64px) */
+section[id] {
+  scroll-snap-align: start;
+  scroll-margin-top: 4rem;
+}
+
+/* Let the last section scroll freely so the footer remains reachable */
+section[id]:last-of-type {
+  scroll-snap-align: none;
 }
 
 ::selection {

@@ -128,18 +128,11 @@ function smoothstep(edge0: number, edge1: number, x: number) {
   return t * t * (3 - 2 * t);
 }
 
-export type SkyStats = {
-  fps: number;
-  gpu: string;
-  resolution: string;
-};
-
 export type SkyCanvasProps = {
   reducedMotion?: boolean;
   themeMode?: "light" | "dark";
   onPaletteChange?: (illumination: number, tintHsl: string) => void;
   onBodiesChange?: (bodies: SkyBodies) => void;
-  onStatsChange?: (stats: SkyStats) => void;
 };
 
 export type BodyInfo = {
@@ -162,7 +155,6 @@ export function SkyCanvas({
   themeMode = "dark",
   onPaletteChange,
   onBodiesChange,
-  onStatsChange,
 }: Readonly<SkyCanvasProps>) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const location = useViewerLocation();
@@ -185,11 +177,6 @@ export function SkyCanvas({
   useEffect(() => {
     onBodiesChangeRef.current = onBodiesChange;
   }, [onBodiesChange]);
-  const onStatsChangeRef = useRef(onStatsChange);
-  useEffect(() => {
-    onStatsChangeRef.current = onStatsChange;
-  }, [onStatsChange]);
-
   // Emit both bodies whenever celestial state or location changes. Each one is
   // included only when it's at least near the horizon AND its rendered
   // visibility on screen is non-trivial — that guarantees we never offer a
@@ -251,14 +238,6 @@ export function SkyCanvas({
     renderer.domElement.style.width = "100%";
     renderer.domElement.style.height = "100%";
     container.appendChild(renderer.domElement);
-
-    // Extract GPU renderer name for the stats HUD.
-    let gpuName = "Unknown";
-    const gl = renderer.getContext();
-    const dbgExt = gl.getExtension("WEBGL_debug_renderer_info");
-    if (dbgExt) {
-      gpuName = gl.getParameter(dbgExt.UNMASKED_RENDERER_WEBGL) || gpuName;
-    }
 
     const scene = new THREE.Scene();
     const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
@@ -353,26 +332,11 @@ export function SkyCanvas({
 
     const start = performance.now();
     let raf = 0;
-    let frameCount = 0;
-    let lastStatsTime = performance.now();
     const loop = () => {
       if (isVisible && pageVisible) {
         uniforms.uTime.value = (performance.now() - start) / 1000;
         updateUniformsFromState();
         renderer.render(scene, camera);
-        frameCount++;
-      }
-      const now = performance.now();
-      if (now - lastStatsTime >= 1000) {
-        const w = container.clientWidth || 1;
-        const h = container.clientHeight || 1;
-        onStatsChangeRef.current?.({
-          fps: frameCount,
-          gpu: gpuName,
-          resolution: `${Math.round(w * dpr)}×${Math.round(h * dpr)}`,
-        });
-        frameCount = 0;
-        lastStatsTime = now;
       }
       raf = requestAnimationFrame(loop);
     };
