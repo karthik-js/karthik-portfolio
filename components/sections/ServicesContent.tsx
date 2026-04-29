@@ -220,7 +220,7 @@ export function ServicesContent() {
               <motion.div
                 key={title}
                 variants={fadeUp}
-                className="rounded-2xl border border-border bg-card p-6 flex gap-4 hover:border-primary/50 transition-all duration-300"
+                className="rounded-2xl border border-border bg-card p-6 flex gap-4 hover:border-primary/50 transition-colors duration-300"
               >
                 <div className="shrink-0 w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
                   <Icon size={20} className="text-primary" aria-hidden="true" />
@@ -300,7 +300,7 @@ export function ServicesContent() {
               <motion.div
                 key={pkg.name}
                 variants={fadeUp}
-                className={`relative rounded-2xl border bg-card p-8 flex flex-col transition-all duration-300 hover:border-primary/50 ${
+                className={`relative rounded-2xl border bg-card p-8 flex flex-col transition-colors duration-300 hover:border-primary/50 ${
                   pkg.popular
                     ? "border-primary/60 shadow-lg shadow-primary/10"
                     : "border-border"
@@ -351,7 +351,7 @@ export function ServicesContent() {
                       ? undefined
                       : "noopener noreferrer"
                   }
-                  className={`inline-flex items-center justify-center px-5 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                  className={`inline-flex items-center justify-center px-5 py-2.5 rounded-lg text-sm font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                     pkg.popular
                       ? "bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/20"
                       : "border border-border bg-card text-foreground hover:border-primary hover:text-primary"
@@ -392,7 +392,7 @@ export function ServicesContent() {
               <motion.div
                 key={q}
                 variants={fadeUp}
-                className="rounded-2xl border border-border bg-card p-6 hover:border-primary/50 transition-all duration-300"
+                className="rounded-2xl border border-border bg-card p-6 hover:border-primary/50 transition-colors duration-300"
               >
                 <h3 className="text-sm font-semibold text-foreground mb-2">
                   {q}
@@ -430,7 +430,7 @@ export function ServicesContent() {
           <motion.div variants={fadeUp}>
             <a
               href="mailto:karthiktalam8@gmail.com"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-lg text-base font-medium bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/20 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-lg text-base font-medium bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/20 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <Mail size={18} aria-hidden="true" />
               Get in Touch

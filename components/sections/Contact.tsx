@@ -79,7 +79,7 @@ export function Contact() {
                 rel={
                   href.startsWith("mailto") ? undefined : "noopener noreferrer"
                 }
-                className="group p-6 rounded-2xl border border-border bg-card hover:border-primary/50 hover:-translate-y-1 transition-all duration-300 text-left"
+                className="group p-6 rounded-2xl border border-border bg-card hover:border-primary/50 hover:-translate-y-1 transition duration-300 text-left"
               >
                 <div className="flex items-start justify-between mb-4">
                   <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary group-hover:bg-primary/20 transition-colors">

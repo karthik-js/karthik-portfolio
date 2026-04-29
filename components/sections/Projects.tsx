@@ -135,7 +135,7 @@ export function Projects() {
             {projects.length > featured.length && (
               <button
                 onClick={() => setShowAll((v) => !v)}
-                className="text-sm text-muted-foreground hover:text-foreground border border-border hover:border-primary/50 px-4 py-2 rounded-lg transition-all duration-200"
+                className="text-sm text-muted-foreground hover:text-foreground border border-border hover:border-primary/50 px-4 py-2 rounded-lg transition-colors duration-200"
               >
                 {showAll
                   ? "← Show featured only"

@@ -70,7 +70,7 @@ export function Navbar() {
     <>
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+          "fixed top-0 left-0 right-0 z-50 transition-colors duration-300",
           scrolled
             ? "bg-background/80 backdrop-blur-xl border-b border-border"
             : "bg-transparent",
@@ -82,19 +82,16 @@ export function Navbar() {
         >
           {/* Left side */}
           {isHome ? (
-            <a
-              href="#"
-              onClick={(e: React.MouseEvent) => {
-                e.preventDefault();
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              }}
+            <button
+              type="button"
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
               className="flex items-center gap-2 group"
               aria-label="Karthik Talam — Home"
             >
               <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-primary-foreground text-sm font-bold group-hover:bg-primary/80 transition-colors">
                 KT
               </div>
-            </a>
+            </button>
           ) : (
             <Link
               href="/"
@@ -116,7 +113,7 @@ export function Navbar() {
                       activeSection === link.href.slice(1) ? "page" : undefined
                     }
                     className={cn(
-                      "px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 cursor-pointer",
+                      "px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 cursor-pointer",
                       activeSection === link.href.slice(1)
                         ? "text-foreground bg-card"
                         : "text-foreground/70 hover:text-foreground",

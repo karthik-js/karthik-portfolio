@@ -93,7 +93,7 @@ export function Experience() {
           <div className="mt-10 text-center">
             <button
               onClick={() => setShowEarly((v) => !v)}
-              className="text-sm text-muted-foreground hover:text-foreground border border-border hover:border-primary/50 px-4 py-2 rounded-lg transition-all duration-200"
+              className="text-sm text-muted-foreground hover:text-foreground border border-border hover:border-primary/50 px-4 py-2 rounded-lg transition-colors duration-200"
             >
               {showEarly
                 ? "← Hide early career"

@@ -132,7 +132,7 @@ export function About() {
                 <motion.div
                   key={label}
                   variants={fadeUp}
-                  className="p-4 rounded-2xl border border-border bg-card group hover:border-primary/50 transition-all duration-300 flex flex-col items-center text-center"
+                  className="p-4 rounded-2xl border border-border bg-card group hover:border-primary/50 transition-colors duration-300 flex flex-col items-center text-center"
                 >
                   <p className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors leading-tight">
                     {value}

@@ -120,7 +120,7 @@ export function Hero() {
             target="_blank"
             rel="noopener noreferrer"
             download
-            className="inline-flex w-full sm:w-auto items-center justify-center gap-2 px-7 py-3.5 rounded-lg text-base font-medium border border-border bg-card text-foreground hover:border-primary hover:text-primary transition-all duration-200"
+            className="inline-flex w-full sm:w-auto items-center justify-center gap-2 px-7 py-3.5 rounded-lg text-base font-medium border border-border bg-card text-foreground hover:border-primary hover:text-primary transition-colors duration-200"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -172,7 +172,7 @@ export function Hero() {
                 href.startsWith("mailto") ? undefined : "noopener noreferrer"
               }
               aria-label={label}
-              className="flex items-center justify-center w-10 h-10 rounded-lg border border-border text-muted-foreground hover:text-foreground hover:border-primary transition-all duration-200"
+              className="flex items-center justify-center w-10 h-10 rounded-lg border border-border text-muted-foreground hover:text-foreground hover:border-primary transition-colors duration-200"
             >
               <Icon size={18} />
             </a>
